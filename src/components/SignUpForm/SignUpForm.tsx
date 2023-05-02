@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { TextInput } from '../TextInputForm/TextInputForm';
-import { validationSchema } from '../../utils/formValidationSchema';
-import { IFormValues } from '../../models/IFormValues';
+import { IFormValues } from 'models/IFormValues';
+import { validationSchema } from 'utils/formValidationSchema';
+import { TextInput } from 'components/TextInputForm/TextInputForm';
 
 const SignUpForm = () => {
   const {

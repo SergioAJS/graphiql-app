@@ -1,4 +1,4 @@
-import { CustomLink } from '../CustomLink/CustomLink';
+import { CustomLink } from 'components/CustomLink/CustomLink';
 
 export const Header = () => {
   return (
