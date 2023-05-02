@@ -5,7 +5,7 @@ import { GraphiqlPage } from './pages/GraphiqlPage/GraphiqlPage';
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { WelcomePage } from './pages/WelcomePage/WelcomePage';
 import { Layout } from './components/Layout/Layout';
-import SignUpForm from './components/sign-up-form/sign-up-form';
+import SignUpForm from './components/SignUpForm/SignUpForm';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { TextInput } from '../text-input-form/text-input-form';
+import { TextInput } from '../TextInputForm/TextInputForm';
 import { validationSchema } from '../../utils/formValidationSchema';
 import { IFormValues } from '../../models/IFormValues';
 
