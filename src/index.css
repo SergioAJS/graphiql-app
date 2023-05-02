@@ -8,8 +8,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(15, 14, 14, 0.87);
+  background-color: #f7fdfd;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,38 +18,12 @@
   -webkit-text-size-adjust: 100%;
 }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #bbbeeb;
-}
-
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #bbbeeb;
-  }
+.header-button {
+  @apply w-24 rounded-md bg-blue-500 p-2 text-blue-50 transition-colors duration-300 hover:bg-blue-600;
 }

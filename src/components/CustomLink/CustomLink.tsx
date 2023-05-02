@@ -9,7 +9,10 @@ export const CustomLink = (props: ICustomLinkProps) => {
   const match = useMatch(props.to);
 
   return (
-    <Link to={props.to} className={match ? 'text-yellow-500' : ''}>
+    <Link
+      to={props.to}
+      className={match ? 'text-blue-700' : 'transition-colors duration-300 hover:text-blue-500'}
+    >
       {props.children}
     </Link>
   );

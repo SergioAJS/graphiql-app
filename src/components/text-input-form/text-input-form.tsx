@@ -22,7 +22,7 @@ export const TextInputForm = ({
   return (
     <label className="block">
       <span
-        className={`block text-sm font-medium after:ml-0.5 ${
+        className={`block text-base font-medium after:ml-0.5 ${
           required && "after:text-red-500 after:content-['*']"
         }`}
       >
