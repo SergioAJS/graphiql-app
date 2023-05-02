@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { TextInputForm } from '../text-input-form/text-input-form';
 import { IFormValues } from 'models/IFormValues';
 import { signInAuthUserWithEmailAndPass } from '../../utils/firebase';
-import { Button } from 'components/Button/button';
+import { Button } from 'components/Button/Button';
 
 const SignInForm = () => {
   const validationSchema = Yup.object().shape({

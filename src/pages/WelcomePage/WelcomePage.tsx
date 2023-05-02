@@ -1,3 +1,3 @@
 export const WelcomePage = () => {
-  return <div>WelcomePage</div>;
+  return <div className="text-center"> WelcomePage</div>;
 };

@@ -1,3 +1,3 @@
 export const GraphiqlPage = () => {
-  return <>GraphiqlPage</>;
+  return <div className="text-center">GraphiqlPage</div>;
 };
