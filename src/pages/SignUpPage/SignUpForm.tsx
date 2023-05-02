@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { IFormValues } from 'models/IFormValues';
-import { Button } from 'components/Bbutton/Bbutton';
+import { Button } from 'components/Button/Button';
 import { TextInputForm } from 'components/TextInputForm/TextInputForm';
 import { CustomLink } from 'components/CustomLink/CustomLink';
 import { signUpValidationSchema } from 'utils/signUpValidationSchema';

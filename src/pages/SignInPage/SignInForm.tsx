@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { IFormValues } from 'models/IFormValues';
 import { TextInputForm } from 'components/TextInputForm/TextInputForm';
-import { Button } from 'components/Bbutton/Bbutton';
+import { Button } from 'components/Button/Button';
 import { CustomLink } from 'components/CustomLink/CustomLink';
 import { signInValidationSchema } from 'utils/signInValidationSchema';
 import { signInAuthUserWithEmailAndPass } from 'utils/firebase';
