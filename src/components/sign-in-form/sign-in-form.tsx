@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { TextInputForm } from '../text-input-form/text-input-form';
 import { Button } from '../button/button';
 import { IFormValues } from '../sign-up-form/sign-up-form';
+import { signInAuthUserWithEmailAndPass } from '../../utils/firebase';
 
 const SignInForm = () => {
   const validationSchema = Yup.object().shape({
@@ -21,11 +22,39 @@ const SignInForm = () => {
   const {
     register,
     formState: { errors },
+    setError,
     handleSubmit,
   } = useForm<IFormValues>({ resolver: yupResolver(validationSchema) });
 
-  const onSubmit: SubmitHandler<IFormValues> = (data: IFormValues) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => {
+    try {
+      const result = await signInAuthUserWithEmailAndPass(data.Email, data.Password);
+      console.log(result);
+    } catch (error: unknown) {
+      const message = error instanceof Error && error.code;
+      switch (message) {
+        case 'auth/wrong-password':
+          setError('Password', {
+            message: 'Wrong password',
+          });
+          break;
+        case 'auth/user-not-found':
+          setError('Email', {
+            message: 'User not found',
+          });
+          break;
+        case 'auth/too-many-requests':
+          setError('Email', {
+            message: 'Too many requests',
+          });
+          setError('Password', {
+            message: 'Too many requests',
+          });
+          break;
+        default:
+          console.log(error);
+      }
+    }
   };
 
   return (

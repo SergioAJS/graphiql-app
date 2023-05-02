@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 import { TextInputForm } from '../text-input-form/text-input-form';
 import { Button } from '../button/button';
+import { createAuthUserWithEmailAndPass, createUserDocFromAuth } from '../../utils/firebase';
 
 export interface IFormValues {
   Name: string;
@@ -23,7 +24,7 @@ const SignUpForm = () => {
     Email: Yup.string().required('Email is required').email('Email is invalid'),
     Password: Yup.string()
       .required('Password is required')
-      .min(4, 'Password must be at least 4 characters')
+      .min(6, 'Password must be at least 6 characters')
       .max(20, 'Password must not exceed 20 characters'),
     /*.matches(/[a-zA-Z]/, 'Password must contain at least one letter')
       .matches(/\d{1,}/, 'Password must contain at least one number')
@@ -35,12 +36,33 @@ const SignUpForm = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
-  } = useForm<IFormValues>({ resolver: yupResolver(validationSchema) });
+    setError,
+  } = useForm<IFormValues>({
+    resolver: yupResolver(validationSchema),
+  });
 
-  const onSubmit: SubmitHandler<IFormValues> = (data: IFormValues) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => {
+    try {
+      const response = await createAuthUserWithEmailAndPass(data.Email, data.Password);
+      const user = response?.user;
+      if (user) {
+        const result = await createUserDocFromAuth(user, {
+          displayName: data.Name,
+          lastName: data['Last Name'],
+        });
+        console.log(result);
+      }
+    } catch (error: unknown) {
+      const message = error instanceof Error && error.code;
+      if (message) {
+        setError('Email', {
+          message: message,
+        });
+      }
+      console.log('Create user encountered an error', error);
+    }
   };
 
   return (
