@@ -12,6 +12,7 @@ type InputProps = {
   errors: FieldErrors<IFormValues>;
   required?: boolean;
 };
+
 export const TextInput = ({ type, label, register, required, errors }: InputProps) => {
   return (
     <label className="block">

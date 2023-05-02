@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 
-interface CustomLinkProps extends PropsWithChildren {
+interface ICustomLinkProps extends PropsWithChildren {
   to: string;
 }
 
-export const CustomLink = (props: CustomLinkProps) => {
+export const CustomLink = (props: ICustomLinkProps) => {
   const match = useMatch(props.to);
 
   return (
