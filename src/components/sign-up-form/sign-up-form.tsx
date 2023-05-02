@@ -2,11 +2,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-import { TextInput } from '../text-input-form/text-input-form';
+import { TextInputForm } from '../text-input-form/text-input-form';
+import { Button } from '../button/button';
 
 export interface IFormValues {
-  Email: string;
   Name: string;
+  Email: string;
   'Last Name': string;
   Password: string;
   'Repeat Password': string;
@@ -22,9 +23,14 @@ const SignUpForm = () => {
     Email: Yup.string().required('Email is required').email('Email is invalid'),
     Password: Yup.string()
       .required('Password is required')
-      .min(6, 'Password must be at least 6 characters')
+      .min(4, 'Password must be at least 4 characters')
       .max(20, 'Password must not exceed 20 characters'),
-    'Repeat Password': Yup.string().required('Confirm Password is required'),
+    /*       .matches(/[a-zA-Z]/, 'Password must contain at least one letter')
+      .matches(/\d{1,}/, 'Password must contain at least one number')
+      .matches(/[`!@%$&^*(){}[]|\\,.]+/, 'Password must contain at least one special character') */
+    'Repeat Password': Yup.string()
+      .required('Confirm Password is required')
+      .oneOf([Yup.ref('Password')], 'Confirm Password does not match'),
   });
 
   const {
@@ -39,44 +45,59 @@ const SignUpForm = () => {
 
   return (
     <>
-      <form className="mx-auto flex w-96 flex-col space-y-4 pt-8" onSubmit={handleSubmit(onSubmit)}>
-        <TextInput
-          type="text"
-          label="Name"
-          register={register}
-          errors={errors}
-          placeholder="Type your name"
-        />
-        <TextInput
-          type="text"
-          label="Last Name"
-          register={register}
-          errors={errors}
-          placeholder="Type your last name"
-          required={false}
-        />
-        <TextInput
-          type="email"
-          label="Email"
-          register={register}
-          errors={errors}
-          placeholder="you@example.com"
-        />
-        <TextInput
-          type="password"
-          label="Password"
-          register={register}
-          errors={errors}
-          placeholder="Create strong password"
-        />
-        <TextInput
-          type="password"
-          label="Repeat Password"
-          register={register}
-          errors={errors}
-          placeholder="Repeat password"
-        />
-      </form>
+      <div className="mx-auto mt-7 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div className="text-center">
+          <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign up</h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            Already have an account?
+            <a className="font-medium text-blue-600 decoration-2 hover:underline" href="#!">
+              {' Sign in here'}
+            </a>
+          </p>
+        </div>
+        <div className="flex items-center py-3 text-xs uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
+          Or
+        </div>
+        <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>
+          <TextInputForm
+            type="text"
+            label="Name"
+            register={register}
+            errors={errors}
+            placeholder="Type your name"
+          />
+          <TextInputForm
+            type="text"
+            label="Last Name"
+            register={register}
+            errors={errors}
+            placeholder="Type your last name"
+            required={false}
+          />
+          <TextInputForm
+            type="email"
+            label="Email"
+            register={register}
+            errors={errors}
+            placeholder="you@example.com"
+          />
+          <TextInputForm
+            type="password"
+            label="Password"
+            register={register}
+            errors={errors}
+            placeholder="Create strong password"
+          />
+          <TextInputForm
+            type="password"
+            label="Repeat Password"
+            register={register}
+            errors={errors}
+            placeholder="Repeat password"
+          />
+          <Button type="submit">Sign up</Button>
+        </form>
+      </div>
     </>
   );
 };
