@@ -5,7 +5,6 @@ import { AuthPage } from 'pages/AuthPage/AuthPage';
 import { GraphiqlPage } from 'pages/GraphiqlPage/GraphiqlPage';
 import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
 import { WelcomePage } from 'pages/WelcomePage/WelcomePage';
-import './App.css';
 
 function App() {
   return (
