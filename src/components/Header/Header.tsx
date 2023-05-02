@@ -1,5 +1,5 @@
 import { CustomLink } from 'components/CustomLink/CustomLink';
-import Container from 'components/containerr/containerr';
+import Container from 'components/container/container';
 
 export const Header = () => {
   return (
