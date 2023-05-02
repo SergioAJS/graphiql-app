@@ -1,3 +1,3 @@
 export const AuthPage = () => {
-  return <>AuthPage</>;
+  return <div className="text-center">AuthPage</div>;
 };
