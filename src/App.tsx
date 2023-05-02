@@ -1,13 +1,24 @@
-import Container from './components/container/container';
-import SignUpForm from './components/sign-up-form/sign-up-form';
-import SignInForm from './components/sign-in-form/sign-in-form';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from 'components/Layout/Layout';
+import SignUpForm from 'components/SignUpForm/SignUpForm';
+import { AuthPage } from 'pages/AuthPage/AuthPage';
+import { GraphiqlPage } from 'pages/GraphiqlPage/GraphiqlPage';
+import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
+import { WelcomePage } from 'pages/WelcomePage/WelcomePage';
 
 function App() {
   return (
-    <Container>
-      <SignUpForm />
-      <SignInForm />
-    </Container>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<WelcomePage />} />
+          <Route path="graphiql" element={<GraphiqlPage />} />
+          <Route path="auth" element={<AuthPage />} />
+          <Route path="signup" element={<SignUpForm />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

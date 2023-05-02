@@ -3,57 +3,58 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
 import { TextInputForm } from '../text-input-form/text-input-form';
-import { Button } from '../button/button';
-import { IFormValues } from '../sign-up-form/sign-up-form';
-import { signInAuthUserWithEmailAndPass } from '../../utils/firebase';
+import { createAuthUserWithEmailAndPass, createUserDocFromAuth } from '../../utils/firebase';
+import { Button } from 'components/Button/button';
+import { IFormValues } from 'models/IFormValues';
 
-const SignInForm = () => {
+const SignUpForm = () => {
   const validationSchema = Yup.object().shape({
+    Name: Yup.string()
+      .required('Name is required')
+      .min(4, 'Name must be at least 4 characters')
+      .max(20, 'Name must not exceed 20 characters'),
+    'Last Name': Yup.string().optional().max(20, 'Name must not exceed 20 characters'),
     Email: Yup.string().required('Email is required').email('Email is invalid'),
     Password: Yup.string()
       .required('Password is required')
-      .min(4, 'Password must be at least 4 characters')
+      .min(6, 'Password must be at least 6 characters')
       .max(20, 'Password must not exceed 20 characters'),
     /*.matches(/[a-zA-Z]/, 'Password must contain at least one letter')
       .matches(/\d{1,}/, 'Password must contain at least one number')
       .matches(/[`!@%$&^*(){}[]|\\,.]+/, 'Password must contain at least one special character') */
+    'Repeat Password': Yup.string()
+      .required('Confirm Password is required')
+      .oneOf([Yup.ref('Password')], 'Confirm Password does not match'),
   });
 
   const {
     register,
     formState: { errors },
-    setError,
     handleSubmit,
-  } = useForm<IFormValues>({ resolver: yupResolver(validationSchema) });
+    setError,
+  } = useForm<IFormValues>({
+    resolver: yupResolver(validationSchema),
+  });
 
   const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => {
     try {
-      const result = await signInAuthUserWithEmailAndPass(data.Email, data.Password);
-      console.log(result);
+      const response = await createAuthUserWithEmailAndPass(data.Email, data.Password);
+      const user = response?.user;
+      if (user) {
+        const result = await createUserDocFromAuth(user, {
+          displayName: data.Name,
+          lastName: data['Last Name'],
+        });
+        console.log(result);
+      }
     } catch (error: unknown) {
       const message = error instanceof Error && error.code;
-      switch (message) {
-        case 'auth/wrong-password':
-          setError('Password', {
-            message: 'Wrong password',
-          });
-          break;
-        case 'auth/user-not-found':
-          setError('Email', {
-            message: 'User not found',
-          });
-          break;
-        case 'auth/too-many-requests':
-          setError('Email', {
-            message: 'Too many requests',
-          });
-          setError('Password', {
-            message: 'Too many requests',
-          });
-          break;
-        default:
-          console.log(error);
+      if (message) {
+        setError('Email', {
+          message: message,
+        });
       }
+      console.log('Create user encountered an error', error);
     }
   };
 
@@ -61,11 +62,11 @@ const SignInForm = () => {
     <>
       <div className="mx-auto mt-7 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div className="text-center">
-          <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h2>
+          <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign up</h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Don&apos;t have an account yet?
+            Already have an account?
             <a className="font-medium text-blue-600 decoration-2 hover:underline" href="#!">
-              {' Sign up here'}
+              {' Sign in here'}
             </a>
           </p>
         </div>
@@ -73,6 +74,21 @@ const SignInForm = () => {
           Or
         </div>
         <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>
+          <TextInputForm
+            type="text"
+            label="Name"
+            register={register}
+            errors={errors}
+            placeholder="Type your name"
+          />
+          <TextInputForm
+            type="text"
+            label="Last Name"
+            register={register}
+            errors={errors}
+            placeholder="Type your last name"
+            required={false}
+          />
           <TextInputForm
             type="email"
             label="Email"
@@ -85,7 +101,14 @@ const SignInForm = () => {
             label="Password"
             register={register}
             errors={errors}
-            placeholder="Type password"
+            placeholder="Create strong password"
+          />
+          <TextInputForm
+            type="password"
+            label="Repeat Password"
+            register={register}
+            errors={errors}
+            placeholder="Repeat password"
           />
           <Button type="submit">Sign up</Button>
         </form>
@@ -94,4 +117,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;

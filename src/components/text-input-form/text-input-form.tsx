@@ -1,5 +1,5 @@
 import { FieldErrors, Path, UseFormRegister } from 'react-hook-form';
-import { IFormValues } from '../sign-up-form/sign-up-form';
+import { IFormValues } from '../SignUpForm/SignUpForm';
 
 type InputProps = {
   type: string;
