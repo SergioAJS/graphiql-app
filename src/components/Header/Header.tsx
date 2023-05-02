@@ -12,10 +12,14 @@ export const Header = () => {
       </div>
       <div className="flex items-center gap-5">
         <div className="text-center">
-          <CustomLink to="/">Welcome</CustomLink>
+          <CustomLink class="transition-colors duration-300 hover:text-blue-500" to="/">
+            Welcome
+          </CustomLink>
         </div>
         <div className="text-center">
-          <CustomLink to="/graphiql">GraphiQL</CustomLink>
+          <CustomLink class="transition-colors duration-300 hover:text-blue-500" to="/graphiql">
+            GraphiQL
+          </CustomLink>
         </div>
         <div className="text-center">
           <CustomLink to="/signin">

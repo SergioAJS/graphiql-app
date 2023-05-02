@@ -4,6 +4,7 @@ import SignUpForm from 'pages/SignUpPage/SignUpForm';
 import { GraphiqlPage } from 'pages/GraphiqlPage/GraphiqlPage';
 import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
 import { WelcomePage } from 'pages/WelcomePage/WelcomePage';
+import SignInForm from 'pages/SignInPage/SignInForm';
 
 function App() {
   return (
