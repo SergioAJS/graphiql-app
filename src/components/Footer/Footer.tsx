@@ -1,4 +1,4 @@
-import Container from 'components/containerr/containerr';
+import Container from 'components/container/container';
 
 export const Footer = () => {
   return (
