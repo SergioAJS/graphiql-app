@@ -7,15 +7,18 @@ import { enumToArray } from 'utils/enumToArray';
 export const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setCurrentLang] = useState(Language.en);
+  const [liClass, setLiClass] = useState(false);
   const languageList = enumToArray(Language);
 
   const langHoverHandler = () => {
+    setLiClass((prev) => !prev);
     setLangOpen((prev) => !prev);
   };
 
   const onLangChoose = (language: Language) => {
     setCurrentLang(language);
     setLangOpen(false);
+    setLiClass(false);
   };
 
   return (
@@ -48,11 +51,15 @@ export const Header = () => {
               <button className="header-button">Sign Up</button>
             </CustomLink>
           </div>
-          <div className="text-center">
+          <div
+            className="flex cursor-pointer items-center justify-center text-center"
+            onMouseEnter={langHoverHandler}
+            onMouseLeave={langHoverHandler}
+          >
             <li
-              className="relative z-10 flex w-10 cursor-pointer flex-col items-center justify-center p-2 duration-300 hover:bg-blue-200"
-              onMouseEnter={langHoverHandler}
-              onMouseLeave={langHoverHandler}
+              className={`relative z-10 flex w-10 cursor-pointer flex-col items-center justify-center p-2 ${
+                liClass ? 'bg-blue-200' : ''
+              }`}
             >
               <p>{Language[lang].toUpperCase()}</p>
               <ul className="absolute top-full w-full bg-blue-500 text-white">
@@ -76,6 +83,16 @@ export const Header = () => {
                   ))}
               </ul>
             </li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="h-4 w-4"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
           </div>
         </div>
       </div>
