@@ -9,7 +9,8 @@
 
   color-scheme: light dark;
   color: rgba(15, 14, 14, 0.87);
-  background-color: #f7fdfd;
+  background-color: white;
+  overflow-x: hidden;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

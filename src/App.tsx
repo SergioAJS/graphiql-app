@@ -41,8 +41,8 @@ function App() {
             <Route path="signin" element={<SignInForm />} />
             <Route path="signup" element={<SignUpForm />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
