@@ -102,7 +102,7 @@ const SignUpForm = () => {
               errors={errors}
               placeholder="Repeat password"
             />
-            <Button type="submit">Sign up</Button>
+            <Button type="submit">Sign Up</Button>
           </form>
         </div>
       </div>

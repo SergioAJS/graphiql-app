@@ -3,6 +3,11 @@ import { ReactComponent as Logo } from 'assets/logo.svg';
 import { useState } from 'react';
 import { Language } from 'models/Language';
 import { enumToArray } from 'utils/enumToArray';
+import { UserContext } from 'utils/userContext';
+import { useContext } from 'react';
+import { Button } from 'components/Button/Button';
+import { signOutUser } from 'utils/firebase';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
@@ -19,6 +24,14 @@ export const Header = () => {
     setCurrentLang(language);
     setLangOpen(false);
     setLiClass(false);
+  };
+
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const signOut = () => {
+    signOutUser();
+    navigate('/');
   };
 
   return (
@@ -41,16 +54,22 @@ export const Header = () => {
               GraphiQL
             </CustomLink>
           </div>
-          <div className="text-center">
-            <CustomLink to="/signin">
-              <button className="header-button">Sign In</button>
-            </CustomLink>
-          </div>
-          <div className="text-center">
-            <CustomLink to="/signup">
-              <button className="header-button">Sign Up</button>
-            </CustomLink>
-          </div>
+          {user ? (
+            <Button onClick={signOut}>Sign Out</Button>
+          ) : (
+            <>
+              <div className="text-center">
+                <CustomLink to="/signin">
+                  <button className="header-button">Sign In</button>
+                </CustomLink>
+              </div>
+              <div className="text-center">
+                <CustomLink to="/signup">
+                  <button className="header-button">Sign Up</button>
+                </CustomLink>
+              </div>
+            </>
+          )}
           <div
             className="flex cursor-pointer items-center justify-center text-center"
             onMouseEnter={langHoverHandler}
