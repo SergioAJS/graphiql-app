@@ -15,8 +15,8 @@ function App() {
           <Route path="graphiql" element={<GraphiqlPage />} />
           <Route path="signin" element={<SignInForm />} />
           <Route path="signup" element={<SignUpForm />} />
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
