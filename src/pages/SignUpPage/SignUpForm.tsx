@@ -48,7 +48,7 @@ const SignUpForm = () => {
         style={{ backgroundImage: `url(/images/form.webp)` }}
       >
         <Container>
-          <div className="relative flex h-full w-full grow flex-wrap items-center justify-center">
+          <div className="relative mt-[10vh] flex h-full w-full grow flex-wrap items-center justify-center">
             <div className="w-1/2"></div>
             <div className="relative mx-auto my-5 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
               <div className="text-center">

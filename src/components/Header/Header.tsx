@@ -8,7 +8,7 @@ import { useContext } from 'react';
 import { Button } from 'components/Button/Button';
 import { signOutUser } from 'utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import { useScrollPosition } from 'utils/useScrollPosition';
+import { useScrollPosition } from 'hooks/useScrollPosition';
 import Container from 'components/Container/Container';
 
 export const Header = () => {
@@ -41,7 +41,7 @@ export const Header = () => {
     <header
       className={`${
         scrollPosition < 50 ? 'bg-white/50' : 'bg-white'
-      } sticky top-0 z-50 flex w-screen items-center justify-center py-2 transition-colors duration-200`}
+      } fixed z-10 flex min-h-[10vh] w-screen items-center justify-center py-2 transition-colors duration-200`}
     >
       <Container className="flex w-full items-center justify-between gap-5 font-semibold">
         <div className="flex items-end justify-center gap-1 font-medium">
