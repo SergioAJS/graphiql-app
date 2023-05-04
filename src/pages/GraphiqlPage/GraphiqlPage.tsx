@@ -3,7 +3,9 @@ import { Button } from 'components/Button/Button';
 export const GraphiqlPage = () => {
   return (
     <>
-      <Button>Query</Button>
+      <div className="mx-auto flex-grow">
+        <Button>Query</Button>
+      </div>
     </>
   );
 };
