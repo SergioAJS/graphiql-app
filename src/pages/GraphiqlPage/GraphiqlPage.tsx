@@ -1,3 +1,9 @@
+import { Button } from 'components/Button/Button';
+
 export const GraphiqlPage = () => {
-  return <div className="text-center">GraphiqlPage</div>;
+  return (
+    <>
+      <Button color="pink">Query</Button>
+    </>
+  );
 };
