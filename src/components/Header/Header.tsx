@@ -8,12 +8,14 @@ import { useContext } from 'react';
 import { Button } from 'components/Button/Button';
 import { signOutUser } from 'utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import { useScrollPosition } from 'utils/useScrollPosition';
 
 export const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setCurrentLang] = useState(Language.en);
   const [liClass, setLiClass] = useState(false);
   const languageList = enumToArray(Language);
+  const scrollPosition = useScrollPosition();
 
   const langHoverHandler = () => {
     setLiClass((prev) => !prev);
@@ -35,7 +37,11 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 items-center justify-center border-b-2 py-2">
+    <header
+      className={`${
+        scrollPosition < 50 ? 'bg-white/50' : 'bg-white'
+      } sticky top-0 z-50 flex min-h-[10vh] w-screen items-center justify-center py-2 transition-colors duration-200`}
+    >
       <div className="container flex w-full items-center justify-between gap-5 px-10 font-semibold">
         <div className="flex items-end justify-center gap-1 font-medium">
           <CustomLink to="/">
