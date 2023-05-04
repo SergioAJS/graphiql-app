@@ -6,7 +6,7 @@ export type Props = {
 };
 
 const Container = ({ className = '', children, style }: PropsWithChildren<Props>) => (
-  <div className={`container mx-auto ${className}`} style={style}>
+  <div className={`container mx-auto px-10 ${className}`} style={style}>
     {children}
   </div>
 );
