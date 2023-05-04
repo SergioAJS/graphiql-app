@@ -1,9 +1,10 @@
 import { ReactComponent as RsLogo } from 'assets/rs_school_js.svg';
+import Container from 'components/Container/Container';
 
 export const Footer = () => {
   return (
-    <footer className="flex min-h-[25vh] w-screen items-end justify-center border-t-2">
-      <div className="container flex w-full items-center justify-between gap-5 px-10 pb-4 font-medium">
+    <footer className="bottom-0 w-screen items-end justify-center border-t-2">
+      <Container className="flex w-full items-center justify-between gap-5 p-4 font-medium">
         <a className="w-1/3" href="https://rs.school/react/" target="_blank" rel="noreferrer">
           <RsLogo />
         </a>
@@ -94,7 +95,7 @@ export const Footer = () => {
             </svg>
           </a>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };
