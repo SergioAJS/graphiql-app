@@ -35,7 +35,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex min-h-[10vh] w-screen items-center justify-center border-b-2">
+    <header className="sticky top-0 z-50 justify-center border-b-2">
       <div className="container flex w-full items-center justify-between gap-5 px-10 font-semibold">
         <div className="flex items-end justify-center gap-1 font-medium">
           <CustomLink to="/">

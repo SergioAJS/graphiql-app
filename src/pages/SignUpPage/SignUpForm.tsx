@@ -43,11 +43,6 @@ const SignUpForm = () => {
   return (
     <>
       <div className="relative flex h-full w-full grow flex-wrap items-center justify-center">
-        <img
-          className="absolute h-full w-full justify-self-end object-cover"
-          src="/images/form.webp"
-          alt="form_background"
-        />
         <div className="w-1/2"></div>
         <div className="relative mx-auto my-7 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
           <div className="text-center">

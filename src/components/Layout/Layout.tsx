@@ -7,9 +7,14 @@ export const Layout = () => {
   return (
     <>
       <Header />
-      <Container>
-        <Outlet />
-      </Container>
+      <div
+        className="flex-grow bg-cover bg-no-repeat"
+        style={{ backgroundImage: `url(/images/welcome2.webp)` }}
+      >
+        <Container>
+          <Outlet />
+        </Container>
+      </div>
       <Footer />
     </>
   );

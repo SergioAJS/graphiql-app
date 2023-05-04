@@ -51,12 +51,7 @@ const SignInForm = () => {
 
   return (
     <>
-      <div className="relative flex h-full w-full grow flex-wrap items-center justify-center">
-        <img
-          className="absolute h-full w-full justify-self-end object-cover"
-          src="/images/welcome2.webp"
-          alt="form_background"
-        />
+      <div>
         <div className="relative mx-auto my-5 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
           <div className="text-center">
             <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h2>

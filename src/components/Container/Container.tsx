@@ -2,12 +2,11 @@ import { PropsWithChildren } from 'react';
 
 export type Props = {
   className?: string;
+  style?: React.CSSProperties;
 };
 
-const Container = ({ className = '', children }: PropsWithChildren<Props>) => (
-  <div
-    className={`container mx-auto flex min-h-[65vh] flex-col items-center justify-between ${className}`}
-  >
+const Container = ({ className = '', children, style }: PropsWithChildren<Props>) => (
+  <div className={`container mx-auto ${className}`} style={style}>
     {children}
   </div>
 );

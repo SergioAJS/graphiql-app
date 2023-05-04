@@ -2,7 +2,7 @@ import { ReactComponent as RsLogo } from 'assets/rs_school_js.svg';
 
 export const Footer = () => {
   return (
-    <footer className="flex min-h-[25vh] w-screen items-end justify-center border-t-2">
+    <footer className="bottom-0 w-screen items-end justify-center border-t-2">
       <div className="container flex w-full items-center justify-between gap-5 px-10 pb-4 font-medium">
         <a className="w-1/3" href="https://rs.school/react/" target="_blank" rel="noreferrer">
           <RsLogo />
