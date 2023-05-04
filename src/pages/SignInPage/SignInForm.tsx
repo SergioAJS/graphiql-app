@@ -59,7 +59,7 @@ const SignInForm = () => {
         <Container>
           {' '}
           <div>
-            <div className="relative mx-auto my-5 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <div className="relative mx-auto mb-5 mt-[12vh] w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
               <div className="text-center">
                 <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h2>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
