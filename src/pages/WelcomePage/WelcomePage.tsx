@@ -3,7 +3,7 @@ import Container from 'components/Container/Container';
 export const WelcomePage = () => {
   return (
     <div
-      className="flex-grow bg-cover bg-no-repeat"
+      className="flex-grow bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(/images/welcome.webp)` }}
     >
       <Container>
