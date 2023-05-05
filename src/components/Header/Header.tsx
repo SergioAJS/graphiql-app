@@ -3,12 +3,14 @@ import { ReactComponent as Logo } from 'assets/logo.svg';
 import { useState } from 'react';
 import { Language } from 'models/Language';
 import { enumToArray } from 'utils/enumToArray';
+import { useTranslation } from 'react-i18next';
 
 export const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setCurrentLang] = useState(Language.en);
   const [liClass, setLiClass] = useState(false);
   const languageList = enumToArray(Language);
+  const { t, i18n } = useTranslation();
 
   const langHoverHandler = () => {
     setLiClass((prev) => !prev);
@@ -16,6 +18,7 @@ export const Header = () => {
   };
 
   const onLangChoose = (language: Language) => {
+    i18n.changeLanguage(language);
     setCurrentLang(language);
     setLangOpen(false);
     setLiClass(false);
@@ -33,7 +36,7 @@ export const Header = () => {
         <div className="flex items-center gap-5">
           <div className="text-center">
             <CustomLink class="transition-colors duration-300 hover:text-blue-500" to="/">
-              Welcome
+              {t('Welcome')}
             </CustomLink>
           </div>
           <div className="text-center">
@@ -43,12 +46,12 @@ export const Header = () => {
           </div>
           <div className="text-center">
             <CustomLink to="/signin">
-              <button className="header-button">Sign In</button>
+              <button className="header-button">{t('Sign In')}</button>
             </CustomLink>
           </div>
           <div className="text-center">
             <CustomLink to="/signup">
-              <button className="header-button">Sign Up</button>
+              <button className="header-button">{t('Sign Up')}</button>
             </CustomLink>
           </div>
           <div

@@ -1,0 +1,24 @@
+{
+  "Header.tsx": "",
+  "Welcome": "Welcome",
+  "Sign In": "Sign In",
+  "Sign Up": "Sign Up",
+
+  "NotFoundPage.tsx": "",
+  "Oops!": "Oops",
+  "The page you are looking for does not exist": "The page you are looking for does not exist",
+  "Back to Home": "Back to Home",
+
+  "SignInForm.tsx": "",
+  "Wrong password": "Wrong password",
+  "User not found": "User not found",
+  "Too many requests": "Too many requests",
+  "Sign in": "Sign in",
+  "Don't have an account yet": "Don't have an account yet",
+  "Sign up here": " Sign up here",
+  "Or": "Or",
+  "Email": "Email",
+  "Password": "Password",
+  "Type password": "Type password",
+  "Sign up": "Sign up"
+}
