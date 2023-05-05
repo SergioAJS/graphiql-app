@@ -20,5 +20,18 @@
   "Email": "Email",
   "Password": "Password",
   "Type password": "Type password",
-  "Sign up": "Sign up"
+
+  "SignUpForm.tsx": "",
+  "Sign up": "Sign up",
+  "Already have an account": "Already have an account",
+  "Sign in here": " Sign in here",
+  "Name": "Name",
+  "Type your name": "Type your name",
+  "Last Name": "Last Name",
+  "Type your last name": "Type your last name",
+  "Create strong password": "Create strong password",
+  "Repeat Password": "Repeat Password",
+
+  "TextInputForm": "",
+  "optional": "optional"
 }

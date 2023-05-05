@@ -20,5 +20,18 @@
   "Email": "Электронная почта",
   "Password": "Пароль",
   "Type password": "Укажите пароль",
-  "Sign up": "Зарегистрироваться"
+  
+  "SignUpForm.tsx": "",
+  "Sign up": "Зарегистрироваться",
+  "Already have an account": "Уже есть аккаунт",
+  "Sign in here": " Войдите здесь",
+  "Name": "Имя",
+  "Type your name": "Укажите ваше имя",
+  "Last Name": "Фамилия",
+  "Type your last name": "Укажите вашу фамилию",
+  "Create strong password": "Придумайте надежный пароль",
+  "Repeat Password": "Повторите пароль",
+
+  "TextInputForm": "",
+  "optional": "опционально"
 }
