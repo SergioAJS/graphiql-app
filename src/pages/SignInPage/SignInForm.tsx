@@ -80,6 +80,7 @@ const SignInForm = () => {
               <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <TextInputForm
                   type="email"
+                  name="Email"
                   label={t('Email')}
                   register={register}
                   errors={errors}
@@ -87,6 +88,7 @@ const SignInForm = () => {
                 />
                 <TextInputForm
                   type="password"
+                  name="Password"
                   label={t('Password')}
                   register={register}
                   errors={errors}
