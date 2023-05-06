@@ -1,5 +1,6 @@
 import { IFormValues } from 'models/IFormValues';
 import { FieldErrors, Path, UseFormRegister } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 type InputProps = {
   type: string;
@@ -19,6 +20,7 @@ export const TextInputForm = ({
   placeholder,
   errors,
 }: InputProps) => {
+  const { t } = useTranslation('textInputForm');
   return (
     <label className="block">
       <span
@@ -26,7 +28,7 @@ export const TextInputForm = ({
           required && "after:text-red-500 after:content-['*']"
         }`}
       >
-        {`${required ? label : label + ' (optional)'}`}
+        {required ? label : `${label} (${t('optional')})`}
       </span>
       <input
         type={type}

@@ -29,5 +29,9 @@ body {
 }
 
 .header-button {
-  @apply w-24 rounded-md bg-blue-500 p-2 text-blue-50 transition-colors duration-300 hover:bg-blue-600;
+  @apply w-32 rounded-md bg-blue-500 p-2 text-blue-50 transition-colors duration-300 hover:bg-blue-600;
+}
+
+.toggle-btn {
+  @apply rotate-180 bg-transparent before:translate-y-0 before:rotate-45 after:translate-y-0 after:-rotate-45;
 }
