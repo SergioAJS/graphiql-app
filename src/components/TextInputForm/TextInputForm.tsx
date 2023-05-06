@@ -20,7 +20,7 @@ export const TextInputForm = ({
   placeholder,
   errors,
 }: InputProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('textInputForm');
   return (
     <label className="block">
       <span

@@ -10,7 +10,7 @@ import { createAuthUserWithEmailAndPass, createUserDocFromAuth } from 'utils/fir
 import { useTranslation } from 'react-i18next';
 
 const SignUpForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('signUpForm');
   const {
     register,
     formState: { errors },

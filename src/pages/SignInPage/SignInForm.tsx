@@ -10,7 +10,7 @@ import { signInAuthUserWithEmailAndPass } from 'utils/firebase';
 import { useTranslation } from 'react-i18next';
 
 const SignInForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('signInForm');
   const {
     register,
     formState: { errors },

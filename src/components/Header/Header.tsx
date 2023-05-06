@@ -10,7 +10,7 @@ export const Header = () => {
   const [lang, setCurrentLang] = useState(Language.en);
   const [liClass, setLiClass] = useState(false);
   const languageList = enumToArray(Language);
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('header');
 
   const langHoverHandler = () => {
     setLiClass((prev) => !prev);

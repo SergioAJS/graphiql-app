@@ -2,7 +2,7 @@ import { CustomLink } from 'components/CustomLink/CustomLink';
 import { useTranslation } from 'react-i18next';
 
 export const NotFoundPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('notFoundPage');
   return (
     <div className="relative flex h-screen w-screen flex-col items-center justify-center bg-black/50">
       <img

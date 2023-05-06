@@ -1,0 +1,12 @@
+{
+  "Wrong password": "Неверный пароль",
+  "User not found": "Пользователь не найден",
+  "Too many requests": "Слишком много запросов",
+  "Sign in": "Войти",
+  "Don't have an account yet": "Ещё нет аккаунта",
+  "Sign up here": " Зарегистрируйтесь здесь",
+  "Or": "Или",
+  "Email": "Электронная почта",
+  "Password": "Пароль",
+  "Type password": "Укажите пароль"
+}

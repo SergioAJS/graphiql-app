@@ -1,15 +1,32 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import english from './english.json';
-import russian from './russian.json';
+import headerEn from './english/header.json';
+import notFoundPageEn from './english/notFoundPage.json';
+import signInFormEn from './english/signInForm.json';
+import signUpFormEn from './english/signUpForm.json';
+import textInputFormEn from './english/textInputForm.json';
+
+import headerRu from './russian/header.json';
+import notFoundPageRu from './russian/notFoundPage.json';
+import signInFormRu from './russian/signInForm.json';
+import signUpFormRu from './russian/signUpForm.json';
+import textInputFormRu from './russian/textInputForm.json';
 
 const resources = {
   en: {
-    translation: english,
+    header: headerEn,
+    notFoundPage: notFoundPageEn,
+    signInForm: signInFormEn,
+    signUpForm: signUpFormEn,
+    textInputForm: textInputFormEn,
   },
   ru: {
-    translation: russian,
+    header: headerRu,
+    notFoundPage: notFoundPageRu,
+    signInForm: signInFormRu,
+    signUpForm: signUpFormRu,
+    textInputForm: textInputFormRu,
   },
 };
 
