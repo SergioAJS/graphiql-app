@@ -7,7 +7,7 @@ export const NotFoundPage = () => {
     <div className="relative flex h-screen w-screen flex-col items-center justify-center bg-black/50">
       <img
         className="absolute h-full w-full object-cover mix-blend-overlay"
-        src="/images/404-1.webp"
+        src="/images/404.webp"
         alt="background_image"
       />
       <div className="flex flex-wrap items-center justify-center gap-10 p-8">

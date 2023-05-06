@@ -7,6 +7,7 @@ import { TextInputForm } from 'components/TextInputForm/TextInputForm';
 import { CustomLink } from 'components/CustomLink/CustomLink';
 import { signUpValidationSchema } from 'utils/signUpValidationSchema';
 import { createAuthUserWithEmailAndPass, createUserDocFromAuth } from 'utils/firebase';
+import Container from 'components/Container/Container';
 import { useTranslation } from 'react-i18next';
 
 const SignUpForm = () => {
@@ -44,71 +45,73 @@ const SignUpForm = () => {
 
   return (
     <>
-      <div className="relative flex h-full w-full grow flex-wrap items-center justify-center">
-        <img
-          className="absolute h-full w-full justify-self-end object-cover"
-          src="/images/form.webp"
-          alt="form_background"
-        />
-        <div className="w-1/2"></div>
-        <div className="relative mx-auto my-7 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-          <div className="text-center">
-            <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">
-              {t('Sign up')}
-            </h2>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              {t('Already have an account')}?
-              <CustomLink
-                class="font-medium text-blue-600 decoration-2 hover:underline"
-                to="/signin"
-              >
-                {t('Sign in here')}
-              </CustomLink>
-            </p>
+      <div
+        className="flex-grow bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(/images/signup.webp)` }}
+      >
+        <Container>
+          <div className="relative mt-[10vh] flex h-full w-full grow flex-wrap items-center justify-center">
+            <div className="w-1/2"></div>
+            <div className="relative mx-auto my-5 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <div className="text-center">
+                <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                  {t('Sign up')}
+                </h2>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  {t('Already have an account')}?
+                  <CustomLink
+                    class="font-medium text-blue-600 decoration-2 hover:underline"
+                    to="/signin"
+                  >
+                    {' Sign in here'}
+                  </CustomLink>
+                </p>
+              </div>
+              <div className="flex items-center py-3 text-xs uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
+                {t('Or')}
+              </div>
+              <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>
+                <TextInputForm
+                  type="text"
+                  label={t('Name')}
+                  register={register}
+                  errors={errors}
+                  placeholder={t('Type your name') || 'Type your name'}
+                />
+                <TextInputForm
+                  type="text"
+                  label={t('Last Name')}
+                  register={register}
+                  errors={errors}
+                  placeholder={t('Type your last name') || 'Type your last name'}
+                  required={false}
+                />
+                <TextInputForm
+                  type="email"
+                  label={t('Email')}
+                  register={register}
+                  errors={errors}
+                  placeholder="you@example.com"
+                />
+                <TextInputForm
+                  type="password"
+                  label={t('Password')}
+                  register={register}
+                  errors={errors}
+                  placeholder={t('Create strong password') || 'Create strong password'}
+                />
+                <TextInputForm
+                  type="password"
+                  label={t('Repeat Password')}
+                  register={register}
+                  errors={errors}
+                  placeholder={t('Repeat password') || 'Repeat password'}
+                />
+                <Button type="submit">{t('Sign Up')}</Button>
+              </form>
+            </div>
           </div>
-          <div className="flex items-center py-3 text-xs uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
-            {t('Or')}
-          </div>
-          <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>
-            <TextInputForm
-              type="text"
-              label={t('Name')}
-              register={register}
-              errors={errors}
-              placeholder={t('Type your name') || 'Type your name'}
-            />
-            <TextInputForm
-              type="text"
-              label={t('Last Name')}
-              register={register}
-              errors={errors}
-              placeholder={t('Type your last name') || 'Type your last name'}
-              required={false}
-            />
-            <TextInputForm
-              type="email"
-              label={t('Email')}
-              register={register}
-              errors={errors}
-              placeholder="you@example.com"
-            />
-            <TextInputForm
-              type="password"
-              label={t('Password')}
-              register={register}
-              errors={errors}
-              placeholder={t('Create strong password') || 'Create strong password'}
-            />
-            <TextInputForm
-              type="password"
-              label={t('Repeat Password')}
-              register={register}
-              errors={errors}
-              placeholder={t('Repeat Password') || 'Repeat Password'}
-            />
-            <Button type="submit">{t('Sign up')}</Button>
-          </form>
-        </div>
+        </Container>
       </div>
     </>
   );
