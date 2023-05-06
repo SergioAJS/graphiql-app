@@ -5,7 +5,6 @@ import { Language } from 'models/Language';
 import { enumToArray } from 'utils/enumToArray';
 import { UserContext } from 'utils/userContext';
 import { useContext } from 'react';
-import { Button } from 'components/Button/Button';
 import { signOutUser } from 'utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useScrollPosition } from 'hooks/useScrollPosition';
