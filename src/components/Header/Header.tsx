@@ -102,7 +102,7 @@ export const Header = () => {
               onMouseLeave={langHoverHandler}
             >
               <li
-                className={`relative z-10 flex w-10 cursor-pointer flex-col items-center justify-center p-2 ${
+                className={`relative z-20 flex w-10 cursor-pointer flex-col items-center justify-center p-2 ${
                   liClass ? 'bg-blue-200' : ''
                 }`}
               >
