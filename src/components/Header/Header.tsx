@@ -80,7 +80,9 @@ export const Header = () => {
                 <></>
               )}
               {user ? (
-                <Button onClick={signOut}>{t('Sign Out')}</Button>
+                <button className="header-button" onClick={signOut}>
+                  {t('Sign Out')}
+                </button>
               ) : (
                 <>
                   <div className="text-center">
