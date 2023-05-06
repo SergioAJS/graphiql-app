@@ -8,8 +8,10 @@ import { CustomLink } from 'components/CustomLink/CustomLink';
 import { signUpValidationSchema } from 'utils/signUpValidationSchema';
 import { createAuthUserWithEmailAndPass, createUserDocFromAuth } from 'utils/firebase';
 import Container from 'components/Container/Container';
+import { useTranslation } from 'react-i18next';
 
 const SignUpForm = () => {
+  const { t } = useTranslation('signUpForm');
   const {
     register,
     formState: { errors },
@@ -52,58 +54,60 @@ const SignUpForm = () => {
             <div className="w-1/2"></div>
             <div className="relative mx-auto my-5 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
               <div className="text-center">
-                <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">Sign up</h2>
+                <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                  {t('Sign up')}
+                </h2>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                  Already have an account?
+                  {t('Already have an account')}?
                   <CustomLink
                     class="font-medium text-blue-600 decoration-2 hover:underline"
                     to="/signin"
                   >
-                    {' Sign in here'}
+                    {t('Sign in here')}
                   </CustomLink>
                 </p>
               </div>
               <div className="flex items-center py-3 text-xs uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
-                Or
+                {t('Or')}
               </div>
               <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <TextInputForm
                   type="text"
-                  label="Name"
+                  label={t('Name')}
                   register={register}
                   errors={errors}
-                  placeholder="Type your name"
+                  placeholder={t('Type your name') || 'Type your name'}
                 />
                 <TextInputForm
                   type="text"
-                  label="Last Name"
+                  label={t('Last Name')}
                   register={register}
                   errors={errors}
-                  placeholder="Type your last name"
+                  placeholder={t('Type your last name') || 'Type your last name'}
                   required={false}
                 />
                 <TextInputForm
                   type="email"
-                  label="Email"
+                  label={t('Email')}
                   register={register}
                   errors={errors}
                   placeholder="you@example.com"
                 />
                 <TextInputForm
                   type="password"
-                  label="Password"
+                  label={t('Password')}
                   register={register}
                   errors={errors}
-                  placeholder="Create strong password"
+                  placeholder={t('Create strong password') || 'Create strong password'}
                 />
                 <TextInputForm
                   type="password"
-                  label="Repeat Password"
+                  label={t('Repeat Password')}
                   register={register}
                   errors={errors}
-                  placeholder="Repeat password"
+                  placeholder={t('Repeat Password') || 'Repeat password'}
                 />
-                <Button type="submit">Sign Up</Button>
+                <Button type="submit">{t('Sign up')}</Button>
               </form>
             </div>
           </div>

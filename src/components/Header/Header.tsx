@@ -10,6 +10,7 @@ import { signOutUser } from 'utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useScrollPosition } from 'hooks/useScrollPosition';
 import Container from 'components/Container/Container';
+import { useTranslation } from 'react-i18next';
 
 export const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
@@ -18,6 +19,7 @@ export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const languageList = enumToArray(Language);
   const scrollPosition = useScrollPosition();
+  const { t, i18n } = useTranslation('header');
 
   const langHoverHandler = () => {
     setLiClass((prev) => !prev);
@@ -25,6 +27,7 @@ export const Header = () => {
   };
 
   const onLangChoose = (language: Language) => {
+    i18n.changeLanguage(language);
     setCurrentLang(language);
     setLangOpen(false);
     setLiClass(false);
@@ -61,7 +64,7 @@ export const Header = () => {
             <div className="hidden items-center gap-5 md:flex" aria-label="main">
               <div className="text-center">
                 <CustomLink class="transition-colors duration-300 hover:text-blue-500" to="/">
-                  Welcome
+                  {t('Welcome')}
                 </CustomLink>
               </div>
               <div className="text-center">
@@ -73,17 +76,17 @@ export const Header = () => {
                 </CustomLink>
               </div>
               {user ? (
-                <Button onClick={signOut}>Sign Out</Button>
+                <Button onClick={signOut}>{t('Sign Out')}</Button>
               ) : (
                 <>
                   <div className="text-center">
                     <CustomLink to="/signin">
-                      <button className="header-button">Sign In</button>
+                      <button className="header-button">{t('Sign In')}</button>
                     </CustomLink>
                   </div>
                   <div className="text-center">
                     <CustomLink to="/signup">
-                      <button className="header-button">Sign Up</button>
+                      <button className="header-button">{t('Sign Up')}</button>
                     </CustomLink>
                   </div>
                 </>
@@ -163,7 +166,7 @@ export const Header = () => {
               to="/"
               onClick={handleBurgerMenu}
             >
-              Welcome
+              {t('Welcome')}
             </CustomLink>
             <CustomLink
               class="transition-colors duration-300 hover:text-blue-500"
@@ -173,14 +176,14 @@ export const Header = () => {
               GraphiQL
             </CustomLink>
             {user ? (
-              <Button onClick={signOut}>Sign Out</Button>
+              <Button onClick={signOut}>{t('Sign Out')}</Button>
             ) : (
               <>
                 <CustomLink to="/signin" onClick={handleBurgerMenu}>
-                  <button className="header-button">Sign In</button>
+                  <button className="header-button">{t('Sign In')}</button>
                 </CustomLink>
                 <CustomLink to="/signup" onClick={handleBurgerMenu}>
-                  <button className="header-button">Sign Up</button>
+                  <button className="header-button">{t('Sign Up')}</button>
                 </CustomLink>
               </>
             )}
