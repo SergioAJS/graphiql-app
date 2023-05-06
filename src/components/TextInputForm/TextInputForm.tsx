@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 type InputProps = {
   type: string;
   label: Path<IFormValues>;
+  name: 'Email' | 'Password' | 'Name' | 'Last Name' | 'Repeat Password';
   register: UseFormRegister<IFormValues>;
   errors: FieldErrors<IFormValues>;
   'data-testid'?: string;
@@ -15,6 +16,7 @@ type InputProps = {
 export const TextInputForm = ({
   type,
   label,
+  name,
   register,
   required = true,
   placeholder,
@@ -32,7 +34,7 @@ export const TextInputForm = ({
       </span>
       <input
         type={type}
-        {...register(label)}
+        {...register(name)}
         className={`mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder-slate-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-base
           ${
             errors[label] &&

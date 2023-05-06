@@ -9,7 +9,8 @@ type LoadingProps = {
 };
 
 const EDITOR_HEIGHT = 700;
-export const GraphiqlPage = () => {
+
+const GraphiqlPage = () => {
   const [code, setCode] = useState(`{
     reactions(first: 10) {
       edges {
@@ -83,3 +84,5 @@ const Loading = ({ loading }: LoadingProps) => (
     {loading && 'Loading'}
   </div>
 );
+
+export default GraphiqlPage;

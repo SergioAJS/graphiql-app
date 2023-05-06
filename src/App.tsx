@@ -1,18 +1,19 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { Layout } from 'components/Layout/Layout';
 import SignUpForm from 'pages/SignUpPage/SignUpForm';
-import { GraphiqlPage } from 'pages/GraphiqlPage/GraphiqlPage';
 import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
 import { WelcomePage } from 'pages/WelcomePage/WelcomePage';
 import SignInForm from 'pages/SignInPage/SignInForm';
 import { UserContext } from 'utils/userContext';
-import { ReactNode, useContext } from 'react';
+import { ReactNode, Suspense, lazy, useContext } from 'react';
 
 type Props = {
   children?: ReactNode;
   redirectPath?: string;
   isAllowed?: boolean;
 };
+
+const GraphiqlPage = lazy(() => import('pages/GraphiqlPage/GraphiqlPage'));
 
 function App() {
   const { user } = useContext(UserContext);
@@ -33,7 +34,9 @@ function App() {
             path="graphiql"
             element={
               <ProtectedRoute isAllowed={user ? true : false}>
-                <GraphiqlPage />
+                <Suspense>
+                  <GraphiqlPage />
+                </Suspense>
               </ProtectedRoute>
             }
           />

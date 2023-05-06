@@ -73,6 +73,7 @@ const SignUpForm = () => {
               <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <TextInputForm
                   type="text"
+                  name="Name"
                   label={t('Name')}
                   register={register}
                   errors={errors}
@@ -80,6 +81,7 @@ const SignUpForm = () => {
                 />
                 <TextInputForm
                   type="text"
+                  name="Last Name"
                   label={t('Last Name')}
                   register={register}
                   errors={errors}
@@ -88,6 +90,7 @@ const SignUpForm = () => {
                 />
                 <TextInputForm
                   type="email"
+                  name="Email"
                   label={t('Email')}
                   register={register}
                   errors={errors}
@@ -95,6 +98,7 @@ const SignUpForm = () => {
                 />
                 <TextInputForm
                   type="password"
+                  name="Password"
                   label={t('Password')}
                   register={register}
                   errors={errors}
@@ -102,6 +106,7 @@ const SignUpForm = () => {
                 />
                 <TextInputForm
                   type="password"
+                  name="Repeat Password"
                   label={t('Repeat Password')}
                   register={register}
                   errors={errors}
