@@ -1,6 +1,6 @@
 import { Button } from 'components/Button/Button';
 
-export const GraphiqlPage = () => {
+const GraphiqlPage = () => {
   return (
     <>
       <div className="mx-auto flex-grow">
@@ -9,3 +9,5 @@ export const GraphiqlPage = () => {
     </>
   );
 };
+
+export default GraphiqlPage;

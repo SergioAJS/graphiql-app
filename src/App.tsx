@@ -1,18 +1,22 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { Layout } from 'components/Layout/Layout';
-import SignUpForm from 'pages/SignUpPage/SignUpForm';
-import { GraphiqlPage } from 'pages/GraphiqlPage/GraphiqlPage';
+// import SignUpForm from 'pages/SignUpPage/SignUpForm';
+// import { GraphiqlPage } from 'pages/GraphiqlPage/GraphiqlPage';
 import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
 import { WelcomePage } from 'pages/WelcomePage/WelcomePage';
-import SignInForm from 'pages/SignInPage/SignInForm';
+// import SignInForm from 'pages/SignInPage/SignInForm';
 import { UserContext } from 'utils/userContext';
-import { ReactNode, useContext } from 'react';
+import { ReactNode, Suspense, lazy, useContext } from 'react';
 
 type Props = {
   children?: ReactNode;
   redirectPath?: string;
   isAllowed?: boolean;
 };
+
+const GraphiqlPage = lazy(() => import('pages/GraphiqlPage/GraphiqlPage'));
+const SignUpForm = lazy(() => import('pages/SignUpPage/SignUpForm'));
+const SignInForm = lazy(() => import('pages/SignInPage/SignInForm'));
 
 function App() {
   const { user } = useContext(UserContext);
@@ -33,13 +37,29 @@ function App() {
             path="graphiql"
             element={
               <ProtectedRoute isAllowed={user ? true : false}>
-                <GraphiqlPage />
+                <Suspense>
+                  <GraphiqlPage />
+                </Suspense>
               </ProtectedRoute>
             }
           />
           <Route element={<ProtectedRoute redirectPath={'/graphiql'} isAllowed={!user} />}>
-            <Route path="signin" element={<SignInForm />} />
-            <Route path="signup" element={<SignUpForm />} />
+            <Route
+              path="signin"
+              element={
+                <Suspense>
+                  <SignInForm />
+                </Suspense>
+              }
+            />
+            <Route
+              path="signup"
+              element={
+                <Suspense>
+                  <SignUpForm />
+                </Suspense>
+              }
+            />
           </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />
