@@ -41,7 +41,7 @@ export const Header = () => {
     <header
       className={`${
         scrollPosition < 50 ? 'bg-white/50' : 'bg-white'
-      } fixed z-10 flex min-h-[10vh] w-screen items-center justify-center py-2 transition-colors duration-200`}
+      } fixed z-30 flex min-h-[10vh] w-screen items-center justify-center py-2 transition-colors duration-200`}
     >
       <Container className="flex w-full items-center justify-between gap-5 font-semibold">
         <div className="flex items-end justify-center gap-1 font-medium">
