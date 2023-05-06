@@ -55,7 +55,7 @@ export const Header = () => {
       <Container>
         <nav className="flex w-full items-center justify-between gap-5 font-semibold">
           <div className="flex items-end justify-center gap-1 font-medium">
-            <CustomLink to="/">
+            <CustomLink to="/" onClick={handleBurgerMenu}>
               <Logo />
             </CustomLink>
             <p className="mb-1 select-none text-lg">Catalysis Hub</p>
