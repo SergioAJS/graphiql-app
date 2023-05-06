@@ -9,6 +9,7 @@ type LoadingProps = {
 };
 
 const EDITOR_HEIGHT = 700;
+
 const GraphiqlPage = () => {
   const [code, setCode] = useState(`{
     reactions(first: 10) {
@@ -22,30 +23,41 @@ const GraphiqlPage = () => {
     }
   }
   `);
-  const [readOnly, setReadOnly] = useState('');
   const [query, setQuery] = useState(code);
   const { data } = useGetGraphQLByQuery(query);
 
   const handleQuery = () => {
     setQuery(code);
-    const result = JSON.stringify(data, null, '\t');
-    setReadOnly(result);
   };
 
   return (
-    <>
-      <div className="relative mt-[10vh] flex flex-grow flex-col ">
-        <div className="absolute left-2/4 top-1 z-20 -translate-x-1/2">
-          <Button onClick={handleQuery}>Query</Button>
-        </div>
-        <div className="relative flex w-full overflow-auto">
+    <div className="relative mt-[10vh] flex flex-grow flex-col">
+      <div className="absolute left-2/4 top-1 z-20 -translate-x-1/2">
+        <Button onClick={handleQuery}>Query</Button>
+      </div>
+      <div className="relative flex w-full overflow-auto">
+        <CodeEditor
+          className="w-1/2 border border-b-0"
+          value={code}
+          language="graphql"
+          onChange={(evn) => {
+            setCode(evn.target.value);
+          }}
+          padding={15}
+          minHeight={EDITOR_HEIGHT}
+          style={{
+            fontSize: 12,
+            backgroundColor: '#f5f5f5',
+            fontFamily:
+              'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+          }}
+        />
+        <div className="relative w-1/2 border border-b-0 ">
+          <Loading loading={false} />
           <CodeEditor
-            className="w-1/2 border border-b-0 "
-            value={code}
+            className="w-auto"
+            value={JSON.stringify(data, null, '\t')}
             language="graphql"
-            onChange={(evn) => {
-              setCode(evn.target.value);
-            }}
             padding={15}
             minHeight={EDITOR_HEIGHT}
             style={{
@@ -55,29 +67,11 @@ const GraphiqlPage = () => {
                 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
             }}
           />
-          <div className="relative w-1/2 border border-b-0 ">
-            <Loading loading={false} />
-            <CodeEditor
-              className="w-auto "
-              value={readOnly}
-              language="graphql"
-              padding={15}
-              minHeight={EDITOR_HEIGHT}
-              style={{
-                fontSize: 12,
-                backgroundColor: '#f5f5f5',
-                fontFamily:
-                  'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-              }}
-            />
-          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
-
-export default GraphiqlPage;
 
 const Loading = ({ loading }: LoadingProps) => (
   <div
@@ -90,3 +84,5 @@ const Loading = ({ loading }: LoadingProps) => (
     {loading && 'Loading'}
   </div>
 );
+
+export default GraphiqlPage;
