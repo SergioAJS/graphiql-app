@@ -7,13 +7,12 @@ import { Button } from 'components/Button/Button';
 import { CustomLink } from 'components/CustomLink/CustomLink';
 import { signInValidationSchema } from 'utils/signInValidationSchema';
 import { signInAuthUserWithEmailAndPass } from 'utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import Container from 'components/Container/Container';
 import { useTranslation } from 'react-i18next';
 
 const SignInForm = () => {
   const { t } = useTranslation('signInForm');
-  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -24,7 +23,6 @@ const SignInForm = () => {
   const onSubmit: SubmitHandler<IFormValues> = async (data: IFormValues) => {
     try {
       await signInAuthUserWithEmailAndPass(data.Email, data.Password);
-      navigate('/graphiql');
     } catch (error: unknown) {
       const message = error instanceof Error && error.code;
       switch (message) {

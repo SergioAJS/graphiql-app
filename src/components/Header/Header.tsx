@@ -67,14 +67,18 @@ export const Header = () => {
                   {t('Welcome')}
                 </CustomLink>
               </div>
-              <div className="text-center">
-                <CustomLink
-                  class="transition-colors duration-300 hover:text-blue-500"
-                  to="/graphiql"
-                >
-                  GraphiQL
-                </CustomLink>
-              </div>
+              {user ? (
+                <div className="text-center">
+                  <CustomLink
+                    class="transition-colors duration-300 hover:text-blue-500"
+                    to="/graphiql"
+                  >
+                    GraphiQL
+                  </CustomLink>
+                </div>
+              ) : (
+                <></>
+              )}
               {user ? (
                 <Button onClick={signOut}>{t('Sign Out')}</Button>
               ) : (
@@ -168,13 +172,17 @@ export const Header = () => {
             >
               {t('Welcome')}
             </CustomLink>
-            <CustomLink
-              class="transition-colors duration-300 hover:text-blue-500"
-              to="/graphiql"
-              onClick={handleBurgerMenu}
-            >
-              GraphiQL
-            </CustomLink>
+            {user ? (
+              <CustomLink
+                class="transition-colors duration-300 hover:text-blue-500"
+                to="/graphiql"
+                onClick={handleBurgerMenu}
+              >
+                GraphiQL
+              </CustomLink>
+            ) : (
+              <></>
+            )}
             {user ? (
               <Button onClick={signOut}>{t('Sign Out')}</Button>
             ) : (
