@@ -9,7 +9,7 @@ type LoadingProps = {
 };
 
 const EDITOR_HEIGHT = 700;
-export const GraphiqlPage = () => {
+const GraphiqlPage = () => {
   const [code, setCode] = useState(`{
     reactions(first: 10) {
       edges {
@@ -24,7 +24,7 @@ export const GraphiqlPage = () => {
   `);
   const [readOnly, setReadOnly] = useState('');
   const [query, setQuery] = useState(code);
-  const { data, error, isFetching } = useGetGraphQLByQuery(query);
+  const { data } = useGetGraphQLByQuery(query);
 
   const handleQuery = () => {
     setQuery(code);
@@ -76,6 +76,8 @@ export const GraphiqlPage = () => {
     </>
   );
 };
+
+export default GraphiqlPage;
 
 const Loading = ({ loading }: LoadingProps) => (
   <div

@@ -5,7 +5,6 @@ import { Language } from 'models/Language';
 import { enumToArray } from 'utils/enumToArray';
 import { UserContext } from 'utils/userContext';
 import { useContext } from 'react';
-import { Button } from 'components/Button/Button';
 import { signOutUser } from 'utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useScrollPosition } from 'hooks/useScrollPosition';
@@ -55,7 +54,7 @@ export const Header = () => {
       <Container>
         <nav className="flex w-full items-center justify-between gap-5 font-semibold">
           <div className="flex items-end justify-center gap-1 font-medium">
-            <CustomLink to="/">
+            <CustomLink to="/" onClick={() => setMenuOpen(false)}>
               <Logo />
             </CustomLink>
             <p className="mb-1 select-none text-lg">Catalysis Hub</p>
@@ -67,16 +66,22 @@ export const Header = () => {
                   {t('Welcome')}
                 </CustomLink>
               </div>
-              <div className="text-center">
-                <CustomLink
-                  class="transition-colors duration-300 hover:text-blue-500"
-                  to="/graphiql"
-                >
-                  GraphiQL
-                </CustomLink>
-              </div>
               {user ? (
-                <Button onClick={signOut}>{t('Sign Out')}</Button>
+                <div className="text-center">
+                  <CustomLink
+                    class="transition-colors duration-300 hover:text-blue-500"
+                    to="/graphiql"
+                  >
+                    GraphiQL
+                  </CustomLink>
+                </div>
+              ) : (
+                <></>
+              )}
+              {user ? (
+                <button className="header-button" onClick={signOut}>
+                  {t('Sign Out')}
+                </button>
               ) : (
                 <>
                   <div className="text-center">
@@ -98,7 +103,7 @@ export const Header = () => {
               onMouseLeave={langHoverHandler}
             >
               <li
-                className={`relative z-10 flex w-10 cursor-pointer flex-col items-center justify-center p-2 ${
+                className={`relative z-20 flex w-10 cursor-pointer flex-col items-center justify-center p-2 ${
                   liClass ? 'bg-blue-200' : ''
                 }`}
               >
@@ -168,15 +173,21 @@ export const Header = () => {
             >
               {t('Welcome')}
             </CustomLink>
-            <CustomLink
-              class="transition-colors duration-300 hover:text-blue-500"
-              to="/graphiql"
-              onClick={handleBurgerMenu}
-            >
-              GraphiQL
-            </CustomLink>
             {user ? (
-              <Button onClick={signOut}>{t('Sign Out')}</Button>
+              <CustomLink
+                class="transition-colors duration-300 hover:text-blue-500"
+                to="/graphiql"
+                onClick={handleBurgerMenu}
+              >
+                GraphiQL
+              </CustomLink>
+            ) : (
+              <></>
+            )}
+            {user ? (
+              <button className="header-button" onClick={signOut}>
+                {t('Sign Out')}
+              </button>
             ) : (
               <>
                 <CustomLink to="/signin" onClick={handleBurgerMenu}>
