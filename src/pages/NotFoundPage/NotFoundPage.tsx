@@ -12,7 +12,7 @@ export const NotFoundPage = () => {
       />
       <div className="flex flex-wrap items-center justify-center gap-10 p-8">
         <div className="flex flex-col">
-          <h2 className="w-60 text-4xl font-semibold text-gray-300">{t('Oops')}!</h2>
+          <h2 className="w-60 text-4xl font-semibold text-gray-300">{t('Oops!')}!</h2>
           <h2 className="w-60 text-4xl font-semibold text-gray-300">
             {t('The page you are looking for does not exist')}.
           </h2>

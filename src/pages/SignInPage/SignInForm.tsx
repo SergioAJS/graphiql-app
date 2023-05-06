@@ -72,7 +72,7 @@ const SignInForm = () => {
                     class="font-medium text-blue-600 decoration-2 hover:underline"
                     to="/signup"
                   >
-                    {' Sign up here'}
+                    {t('Sign up here')}
                   </CustomLink>
                 </p>
               </div>
@@ -94,7 +94,7 @@ const SignInForm = () => {
                   errors={errors}
                   placeholder={t('Type password') || 'Type password'}
                 />
-                <Button type="submit">{t('Sign In')}</Button>
+                <Button type="submit">{t('Sign in')}</Button>
               </form>
             </div>
           </div>

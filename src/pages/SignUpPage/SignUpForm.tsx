@@ -63,7 +63,7 @@ const SignUpForm = () => {
                     class="font-medium text-blue-600 decoration-2 hover:underline"
                     to="/signin"
                   >
-                    {' Sign in here'}
+                    {t('Sign in here')}
                   </CustomLink>
                 </p>
               </div>
@@ -105,9 +105,9 @@ const SignUpForm = () => {
                   label={t('Repeat Password')}
                   register={register}
                   errors={errors}
-                  placeholder={t('Repeat password') || 'Repeat password'}
+                  placeholder={t('Repeat Password') || 'Repeat password'}
                 />
-                <Button type="submit">{t('Sign Up')}</Button>
+                <Button type="submit">{t('Sign up')}</Button>
               </form>
             </div>
           </div>
