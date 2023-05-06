@@ -54,7 +54,7 @@ const SignInForm = () => {
     <>
       <div
         className="flex-grow bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(/images/welcome2.webp)` }}
+        style={{ backgroundImage: `url(/images/signin.webp)` }}
       >
         <Container>
           {' '}

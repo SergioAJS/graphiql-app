@@ -45,7 +45,7 @@ const SignUpForm = () => {
     <>
       <div
         className="flex-grow bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(/images/form.webp)` }}
+        style={{ backgroundImage: `url(/images/signup.webp)` }}
       >
         <Container>
           <div className="relative mt-[10vh] flex h-full w-full grow flex-wrap items-center justify-center">
