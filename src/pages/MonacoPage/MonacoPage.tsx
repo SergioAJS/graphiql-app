@@ -1,41 +1,36 @@
 import { Editor } from '@monaco-editor/react';
-import { useState } from 'react';
-import * as monaco from 'monaco-editor';
+import { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
 import { request, Variables } from 'graphql-request';
 import { EXAMPLE_QUERY, EXAMPLE_VARIABLES, endpoint } from 'redux/apiGraphQL';
-import { useQuery } from 'react-query';
 
 export const MonacoPage = () => {
   const [code, setCode] = useState<string>(EXAMPLE_QUERY);
   const [variablesInput, setVariablesInput] = useState(JSON.stringify(EXAMPLE_VARIABLES));
   const [variables, setVariables] = useState<Variables>(JSON.parse(variablesInput));
   const [query, setQuery] = useState(code);
-
-  const { data } = useQuery('catalysisHub', async () => {
-    return await request(endpoint, query, variables);
-  });
+  const [data, setData] = useState('');
 
   const handleQuery = () => {
     setQuery(code);
     setVariables(JSON.parse(variablesInput));
   };
 
-  const handleCodeChange = (
-    newCode: string | undefined,
-    e: monaco.editor.IModelContentChangedEvent
-  ) => {
+  const handleCodeChange = (newCode: string | undefined) => {
     if (newCode) setCode(newCode);
-    console.log(newCode, e);
   };
 
-  const handleVariablesInputChange = (
-    newVariables: string | undefined,
-    e: monaco.editor.IModelContentChangedEvent
-  ) => {
+  const handleVariablesInputChange = (newVariables: string | undefined) => {
     if (newVariables) setVariablesInput(newVariables);
-    console.log(newVariables, e);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data: string = await request(endpoint, query, variables);
+      setData(data);
+    };
+    fetchData();
+  }, [query, variables]);
 
   return (
     <>
