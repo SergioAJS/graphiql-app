@@ -19,7 +19,3 @@ export const EXAMPLE_QUERY: string = gql`
 export const EXAMPLE_VARIABLES: Variables = {
   first: 3,
 };
-
-// interface Data {
-//   Movie: { releaseDate: string; actors: Array<{ name: string }> };
-// }

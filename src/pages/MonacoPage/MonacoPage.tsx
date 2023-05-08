@@ -7,45 +7,12 @@ import { request, Variables } from 'graphql-request';
 import { EXAMPLE_QUERY, EXAMPLE_VARIABLES, endpoint } from 'redux/apiGraphQL';
 import { useQuery } from 'react-query';
 
-// const endpoint = `https://api.catalysis-hub.org/graphql`;
-
-// const queryGQL = gql`
-//   query CatalysysHub($first: Int) {
-//     reactions(first: $first) {
-//       edges {
-//         node {
-//           Equation
-//           chemicalComposition
-//           reactionEnergy
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// const variables = {
-//   first: 5,
-// };
-
-// const DEFAULT_CODE = `{
-//   reactions(first: 10) {
-//     edges {
-//       node {
-//         Equation
-//         chemicalComposition
-//         reactionEnergy
-//       }
-//     }
-//   }
-// }
-// `;
-
 export const MonacoPage = () => {
   const [code, setCode] = useState<string>(EXAMPLE_QUERY);
   const [variablesInput, setVariablesInput] = useState(JSON.stringify(EXAMPLE_VARIABLES));
   const [variables, setVariables] = useState<Variables>(JSON.parse(variablesInput));
   const [query, setQuery] = useState(code);
-  // const { data } = useGetGraphQLByQuery(query);
+
   const { data } = useQuery('catalysisHub', async () => {
     return await request(endpoint, query, variables);
   });
@@ -70,9 +37,6 @@ export const MonacoPage = () => {
     if (newVariables) setVariablesInput(newVariables);
     console.log(newVariables, e);
   };
-
-  // const data2 = async () => await request(endpoint, code, variables);
-  // console.log(data2());
 
   return (
     <>
