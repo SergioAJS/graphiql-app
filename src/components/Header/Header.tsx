@@ -27,6 +27,7 @@ export const Header = () => {
 
   const onLangChoose = (language: Language) => {
     i18n.changeLanguage(language);
+    localStorage.setItem('lang', language);
     setCurrentLang(language);
     setLangOpen(false);
     setLiClass(false);
