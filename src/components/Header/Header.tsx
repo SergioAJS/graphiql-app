@@ -66,6 +66,11 @@ export const Header = () => {
                   {t('Welcome')}
                 </CustomLink>
               </div>
+              <div className="text-center">
+                <CustomLink class="transition-colors duration-300 hover:text-blue-500" to="monaco">
+                  {t('Monaco')}
+                </CustomLink>
+              </div>
               {user ? (
                 <div className="text-center">
                   <CustomLink

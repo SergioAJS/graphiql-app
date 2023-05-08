@@ -13,8 +13,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.5.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@uiw/react-textarea-code-editor": "^2.1.1",
+    "monaco-editor": "^0.38.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -39,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "firebase": "^9.21.0",
+    "graphql-request": "^6.0.0",
     "husky": "^8.0.0",
     "i18next": "^22.4.15",
     "lint-staged": "^13.2.2",
@@ -48,6 +51,7 @@
     "prettier-plugin-tailwindcss": "^0.2.8",
     "react-hook-form": "^7.43.9",
     "react-i18next": "^12.2.2",
+    "react-query": "^3.39.3",
     "sass": "^1.62.1",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.2",

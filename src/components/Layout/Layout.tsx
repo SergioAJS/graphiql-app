@@ -5,9 +5,11 @@ import { Footer } from 'components/Footer/Footer';
 export const Layout = () => {
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <div className="flex min-h-screen flex-col justify-between">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
     </>
   );
 };

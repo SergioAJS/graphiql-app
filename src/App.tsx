@@ -6,6 +6,7 @@ import { WelcomePage } from 'pages/WelcomePage/WelcomePage';
 import SignInForm from 'pages/SignInPage/SignInForm';
 import { UserContext } from 'utils/userContext';
 import { ReactNode, Suspense, lazy, useContext } from 'react';
+import { MonacoPage } from 'pages/MonacoPage/MonacoPage';
 
 type Props = {
   children?: ReactNode;
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<WelcomePage />} />
+          <Route path="monaco" element={<MonacoPage />} />
           <Route
             path="graphiql"
             element={
