@@ -1,6 +1,5 @@
 import { Editor } from '@monaco-editor/react';
 import { useState } from 'react';
-// import { useGetGraphQLByQuery } from 'redux/api';
 import * as monaco from 'monaco-editor';
 import Container from 'components/Container/Container';
 import { request, Variables } from 'graphql-request';
