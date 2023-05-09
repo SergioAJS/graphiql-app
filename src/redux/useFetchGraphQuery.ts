@@ -43,7 +43,7 @@ export const useFetchGraphQuery = ({
           setData(data);
           setLoading(false);
         } catch (err: unknown) {
-          const message = err instanceof Error ? err.message : 'Somethin went wrong';
+          const message = err instanceof Error ? err.message : 'Something went wrong';
           setError(message);
         }
       }
