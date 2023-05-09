@@ -2,21 +2,16 @@ import { useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 
 import { Button } from 'components/Button/Button';
-import { useGetGraphQLByQuery } from 'redux/api';
-
-type LoadingProps = {
-  loading: boolean;
-};
+import { useFetchGraphQuery } from 'redux/useFetchGraphQuery';
 
 const EDITOR_HEIGHT = 700;
 
 const GraphiqlPage = () => {
-  const [code, setCode] = useState(`{
-    reactions(first: 10) {
+  const [code, setCode] = useState(`query QueryReactions ($first: Int) {
+    reactions(first: $first) {
       edges {
         node {
           Equation
-          chemicalComposition
           reactionEnergy
         }
       }
@@ -24,8 +19,7 @@ const GraphiqlPage = () => {
   }
   `);
   const [query, setQuery] = useState(code);
-  const { data } = useGetGraphQLByQuery(query);
-
+  const { data, isLoading } = useFetchGraphQuery({ query, variables: { first: 5 } });
   const handleQuery = () => {
     setQuery(code);
   };
@@ -53,10 +47,11 @@ const GraphiqlPage = () => {
           }}
         />
         <div className="relative w-1/2 border border-b-0 ">
-          <Loading loading={false} />
+          {isLoading && <Loading />}
           <CodeEditor
             className="w-auto"
-            value={JSON.stringify(data, null, '\t')}
+            value={data}
+            readOnly
             language="graphql"
             padding={15}
             minHeight={EDITOR_HEIGHT}
@@ -73,15 +68,15 @@ const GraphiqlPage = () => {
   );
 };
 
-const Loading = ({ loading }: LoadingProps) => (
+const Loading = () => (
   <div
     className="absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col justify-center text-center"
-    /*style={{
+    style={{
       background: 'rgba(51, 51, 51, 0.62)',
       color: 'white',
-    }} */
+    }}
   >
-    {loading && 'Loading'}
+    Loading
   </div>
 );
 
