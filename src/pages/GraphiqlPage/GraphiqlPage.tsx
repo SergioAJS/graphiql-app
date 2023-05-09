@@ -3,6 +3,7 @@ import CodeEditor from '@uiw/react-textarea-code-editor';
 
 import { Button } from 'components/Button/Button';
 import { useGetGraphQLByQuery } from 'redux/api';
+import { useFetchGraphQuery } from 'redux/useFetchGraphQuery';
 
 type LoadingProps = {
   loading: boolean;
@@ -23,11 +24,10 @@ const GraphiqlPage = () => {
   }
   `);
   const [query, setQuery] = useState(code);
-  const { data } = useGetGraphQLByQuery(query);
+  const [data] = useFetchGraphQuery();
+  //const { data } = useGetGraphQLByQuery(query);
 
-  const handleQuery = () => {
-    setQuery(code);
-  };
+  const handleQuery = () => {};
 
   return (
     <div className="relative mt-[10vh] flex flex-grow flex-col">
@@ -55,7 +55,7 @@ const GraphiqlPage = () => {
           <Loading loading={false} />
           <CodeEditor
             className="w-auto"
-            value={JSON.stringify(data, null, '\t')}
+            value={data}
             language="graphql"
             padding={15}
             minHeight={EDITOR_HEIGHT}
