@@ -11,12 +11,11 @@ type LoadingProps = {
 const EDITOR_HEIGHT = 700;
 
 const GraphiqlPage = () => {
-  const [code, setCode] = useState(`{
+  const [code, setCode] = useState(`query QueryReactions {
     reactions(first: 10) {
       edges {
         node {
           Equation
-          chemicalComposition
           reactionEnergy
         }
       }
