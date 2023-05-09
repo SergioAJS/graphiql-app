@@ -1,9 +1,8 @@
 import { request, gql } from 'graphql-request';
 import { useEffect, useState } from 'react';
-import { set } from 'react-hook-form';
 
 export const useFetchGraphQuery = () => {
-  const [data, setData] = useState<unknown>('');
+  const [data, setData] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const document = gql`
@@ -38,5 +37,5 @@ export const useFetchGraphQuery = () => {
       ignore = true;
     };
   }, [document]);
-  return [data, loading, error];
+  return { data, loading, error };
 };

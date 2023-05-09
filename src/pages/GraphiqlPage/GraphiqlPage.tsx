@@ -2,7 +2,6 @@ import { useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 
 import { Button } from 'components/Button/Button';
-import { useGetGraphQLByQuery } from 'redux/api';
 import { useFetchGraphQuery } from 'redux/useFetchGraphQuery';
 
 type LoadingProps = {
@@ -23,10 +22,7 @@ const GraphiqlPage = () => {
     }
   }
   `);
-  const [query, setQuery] = useState(code);
-  const [data] = useFetchGraphQuery();
-  //const { data } = useGetGraphQLByQuery(query);
-
+  const { data, loading, error } = useFetchGraphQuery();
   const handleQuery = () => {};
 
   return (
