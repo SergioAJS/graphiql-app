@@ -11,8 +11,8 @@ type LoadingProps = {
 const EDITOR_HEIGHT = 700;
 
 const GraphiqlPage = () => {
-  const [code, setCode] = useState(`query QueryReactions {
-    reactions(first: 10) {
+  const [code, setCode] = useState(`query QueryReactions ($first: Int) {
+    reactions(first: $first) {
       edges {
         node {
           Equation
@@ -22,8 +22,11 @@ const GraphiqlPage = () => {
     }
   }
   `);
-  const { data, loading, error } = useFetchGraphQuery();
-  const handleQuery = () => {};
+  const [query, setQuery] = useState(code);
+  const { data } = useFetchGraphQuery({ query, variables: { first: 5 } });
+  const handleQuery = () => {
+    setQuery(code);
+  };
 
   return (
     <div className="relative mt-[10vh] flex flex-grow flex-col">
@@ -48,10 +51,11 @@ const GraphiqlPage = () => {
           }}
         />
         <div className="relative w-1/2 border border-b-0 ">
-          <Loading loading={false} />
+          {/* <Loading loading={false} /> */}
           <CodeEditor
             className="w-auto"
             value={data}
+            readOnly
             language="graphql"
             padding={15}
             minHeight={EDITOR_HEIGHT}
