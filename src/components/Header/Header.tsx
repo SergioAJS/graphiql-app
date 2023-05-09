@@ -13,7 +13,9 @@ import { useTranslation } from 'react-i18next';
 
 export const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
-  const [lang, setCurrentLang] = useState(Language.en);
+  const [lang, setCurrentLang] = useState(
+    (localStorage.getItem('lang') as keyof typeof Language) || Language.en
+  );
   const [liClass, setLiClass] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const languageList = enumToArray(Language);
