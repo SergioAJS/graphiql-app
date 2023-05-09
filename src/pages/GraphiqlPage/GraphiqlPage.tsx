@@ -19,7 +19,7 @@ const GraphiqlPage = () => {
   }
   `);
   const [query, setQuery] = useState(code);
-  const { data, isLoading } = useFetchGraphQuery({ query, variables: { first: 5 } });
+  const { data, isLoading, error } = useFetchGraphQuery({ query, variables: { first: 5 } });
   const handleQuery = () => {
     setQuery(code);
   };
@@ -29,7 +29,10 @@ const GraphiqlPage = () => {
       <div className="absolute left-2/4 top-1 z-20 -translate-x-1/2">
         <Button onClick={handleQuery}>Query</Button>
       </div>
-      <div className="relative flex w-full overflow-auto">
+      <div
+        className="relative flex w-full overflow-auto bg-slate-50"
+        style={{ backgroundColor: '#f5f5f5' }}
+      >
         <CodeEditor
           className="w-1/2 border border-b-0"
           value={code}
@@ -50,7 +53,7 @@ const GraphiqlPage = () => {
           {isLoading && <Loading />}
           <CodeEditor
             className="w-auto"
-            value={data}
+            value={error || data}
             readOnly
             language="graphql"
             padding={15}
@@ -69,13 +72,7 @@ const GraphiqlPage = () => {
 };
 
 const Loading = () => (
-  <div
-    className="absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col justify-center text-center"
-    style={{
-      background: 'rgba(51, 51, 51, 0.62)',
-      color: 'white',
-    }}
-  >
+  <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col justify-center bg-gray-300 text-center text-2xl">
     Loading
   </div>
 );
