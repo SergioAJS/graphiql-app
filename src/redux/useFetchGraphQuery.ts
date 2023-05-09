@@ -24,9 +24,8 @@ export const useFetchGraphQuery = ({
   url = 'https://api.catalysis-hub.org/graphql',
   query = defaultQuery,
   variables = {},
-  headers,
+  headers = new Headers({ 'Content-Type': 'application/json' }),
 }: Props) => {
-  const requestHeaders = new Headers();
   const [data, setData] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -34,16 +33,12 @@ export const useFetchGraphQuery = ({
     ${query}
   `;
 
-  if (!headers) {
-    requestHeaders.set('Content-Type', 'application/json');
-  }
-
   useEffect(() => {
     let ignore = false;
     const fetch = async () => {
       if (!ignore) {
         try {
-          const response = await request(url, document, variables, requestHeaders);
+          const response = await request(url, document, variables, headers);
           const data = JSON.stringify(response, null, '\t');
           setData(data);
           setLoading(false);
@@ -57,6 +52,7 @@ export const useFetchGraphQuery = ({
     return () => {
       ignore = true;
     };
-  }, [document]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [document, variables, headers, url]);
   return { data, loading, error };
 };
