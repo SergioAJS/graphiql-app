@@ -19,22 +19,19 @@ const GraphiqlPage = () => {
   }
   `);
   const [query, setQuery] = useState(code);
-  const { data, isLoading, error } = useFetchGraphQuery({ query, variables: { first: 5 } });
+  const { data, isLoading, error } = useFetchGraphQuery({ query, variables: { first: 20 } });
   const handleQuery = () => {
     setQuery(code);
   };
 
   return (
-    <div className="relative mt-[10vh] flex flex-grow flex-col">
+    <div className="relative mt-16 flex h-[calc(80vh-64px)] flex-grow">
       <div className="absolute left-2/4 top-1 z-20 -translate-x-1/2">
         <Button onClick={handleQuery}>Query</Button>
       </div>
-      <div
-        className="relative flex w-full overflow-auto bg-slate-50"
-        style={{ backgroundColor: '#f5f5f5' }}
-      >
+      <div className="relative flex w-full" style={{ backgroundColor: '#f5f5f5' }}>
         <CodeEditor
-          className="w-1/2 border border-b-0"
+          className="w-1/2 overflow-auto border border-b-0"
           value={code}
           language="graphql"
           onChange={(evn) => {
@@ -49,10 +46,10 @@ const GraphiqlPage = () => {
               'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
           }}
         />
-        <div className="relative w-1/2 border border-b-0 ">
+        <div className="relative w-1/2 overflow-auto border border-b-0 ">
           {isLoading && <Loading />}
           <CodeEditor
-            className="w-auto"
+            className=" w-auto"
             value={error || data}
             readOnly
             language="graphql"
