@@ -52,7 +52,6 @@ export const useFetchGraphQuery = ({
     return () => {
       ignore = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [document, variables, headers, url]);
   return { data, loading, error };
 };
