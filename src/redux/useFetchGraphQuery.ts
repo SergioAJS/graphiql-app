@@ -27,7 +27,7 @@ export const useFetchGraphQuery = ({
   headers = new Headers({ 'Content-Type': 'application/json' }),
 }: Props) => {
   const [data, setData] = useState<string>('');
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const document = gql`
     ${query}
@@ -41,7 +41,7 @@ export const useFetchGraphQuery = ({
           const response = await request(url, document, variables, headers);
           const data = JSON.stringify(response, null, '\t');
           setData(data);
-          setLoading(false);
+          setIsLoading(false);
         } catch (err: unknown) {
           const message = err instanceof Error ? err.message : 'Something went wrong';
           setError(message);
@@ -53,5 +53,6 @@ export const useFetchGraphQuery = ({
       ignore = true;
     };
   }, [document, variables, headers, url]);
-  return { data, loading, error };
+
+  return { data, isLoading, error };
 };

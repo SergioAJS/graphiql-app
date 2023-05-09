@@ -4,10 +4,6 @@ import CodeEditor from '@uiw/react-textarea-code-editor';
 import { Button } from 'components/Button/Button';
 import { useFetchGraphQuery } from 'redux/useFetchGraphQuery';
 
-type LoadingProps = {
-  loading: boolean;
-};
-
 const EDITOR_HEIGHT = 700;
 
 const GraphiqlPage = () => {
@@ -23,7 +19,7 @@ const GraphiqlPage = () => {
   }
   `);
   const [query, setQuery] = useState(code);
-  const { data } = useFetchGraphQuery({ query, variables: { first: 5 } });
+  const { data, isLoading } = useFetchGraphQuery({ query, variables: { first: 5 } });
   const handleQuery = () => {
     setQuery(code);
   };
@@ -51,7 +47,7 @@ const GraphiqlPage = () => {
           }}
         />
         <div className="relative w-1/2 border border-b-0 ">
-          {/* <Loading loading={false} /> */}
+          {isLoading && <Loading />}
           <CodeEditor
             className="w-auto"
             value={data}
@@ -72,15 +68,15 @@ const GraphiqlPage = () => {
   );
 };
 
-const Loading = ({ loading }: LoadingProps) => (
+const Loading = () => (
   <div
     className="absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col justify-center text-center"
-    /*style={{
+    style={{
       background: 'rgba(51, 51, 51, 0.62)',
       color: 'white',
-    }} */
+    }}
   >
-    {loading && 'Loading'}
+    Loading
   </div>
 );
 
