@@ -3,7 +3,12 @@ import CodeEditor from '@uiw/react-textarea-code-editor';
 import { TabPanel, useTabs } from 'react-headless-tabs';
 
 import { Button } from 'components/Button/Button';
-import { QueryProps, useFetchGraphQuery } from 'redux/useFetchGraphQuery';
+import {
+  DEFAULT_QUERY,
+  DEFAULT_VARS,
+  QueryProps,
+  useFetchGraphQuery,
+} from 'redux/useFetchGraphQuery';
 import { TabSelector } from 'components/TabSelector/TabSelector';
 
 const EDITOR_STYLES = {
@@ -17,38 +22,27 @@ const EDITOR_STYLES = {
   padding: 15,
 };
 
-const DEFAULT_VARS = { first: 20 };
-
-const DEFAULT_QUERY = `query QueryReactions ($first: Int) {
-  reactions(first: $first) {
-    edges {
-      node {
-        Equation
-        reactionEnergy
-      }
-    }
-  }
-}
-`;
-
 const GraphiqlPage = () => {
   const [selectedTab, setSelectedTab] = useTabs(['Variables', 'Headers']);
   const [query, setQuery] = useState(DEFAULT_QUERY);
   const [variables, setVariables] = useState(JSON.stringify(DEFAULT_VARS));
   const [headers, setHeaders] = useState('');
-  const [graphQuery, setGraphQuery] = useState<QueryProps>({
-    variables: DEFAULT_VARS,
-    query: DEFAULT_QUERY,
-  });
+  const [graphQuery, setGraphQuery] = useState<QueryProps>({});
   const { data, isLoading, error } = useFetchGraphQuery(graphQuery);
   const handleQuery = () => {
+    let parsedHeaders = new Headers({ 'Content-Type': 'application/json' });
+    let parsedVariables = {};
     try {
-      const parsedVariables = JSON.parse(variables);
-      const parsedHeaders = JSON.parse(headers);
-      setGraphQuery({ variables: parsedVariables, query, headers: parsedHeaders });
+      parsedVariables = JSON.parse(variables);
     } catch {
-      /* add some logic */
+      /* empty */
     }
+    try {
+      parsedHeaders = JSON.parse(headers);
+    } catch {
+      /* empty */
+    }
+    setGraphQuery({ query, variables: parsedVariables, headers: parsedHeaders });
   };
 
   return (
