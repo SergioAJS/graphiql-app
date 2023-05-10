@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 
 export type QueryProps = {
   url?: string;
-  query: string;
+  query?: string;
   variables?: Variables;
   headers?: Headers;
 };
 
-const defaultQuery = `query QueryReactions {
-  reactions(first: 10) {
+export const DEFAULT_QUERY = `query QueryReactions ($first: Int) {
+  reactions(first: $first) {
     edges {
       node {
         Equation
@@ -20,10 +20,12 @@ const defaultQuery = `query QueryReactions {
 }
 `;
 
+export const DEFAULT_VARS = { first: 20 };
+
 export const useFetchGraphQuery = ({
   url = 'https://api.catalysis-hub.org/graphql',
-  query = defaultQuery,
-  variables = {},
+  query = DEFAULT_QUERY,
+  variables = DEFAULT_VARS,
   headers = new Headers({ 'Content-Type': 'application/json' }),
 }: QueryProps) => {
   const [data, setData] = useState<string>('');
