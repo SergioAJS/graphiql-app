@@ -35,7 +35,7 @@ const GraphiqlPage = () => {
     try {
       parsedVariables = JSON.parse(variables);
     } catch {
-      /* empty */
+      /* add some logic */
     }
     try {
       parsedHeaders = JSON.parse(headers);
