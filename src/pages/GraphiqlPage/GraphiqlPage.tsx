@@ -47,7 +47,7 @@ const GraphiqlPage = () => {
       const parsedHeaders = JSON.parse(headers);
       setGraphQuery({ variables: parsedVariables, query, headers: parsedHeaders });
     } catch {
-      /* empty */
+      /* add some logic */
     }
   };
 
