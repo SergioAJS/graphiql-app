@@ -1,7 +1,7 @@
 import { request, gql, Variables } from 'graphql-request';
 import { useEffect, useState } from 'react';
 
-type Props = {
+export type QueryProps = {
   url?: string;
   query: string;
   variables?: Variables;
@@ -25,7 +25,7 @@ export const useFetchGraphQuery = ({
   query = defaultQuery,
   variables = {},
   headers = new Headers({ 'Content-Type': 'application/json' }),
-}: Props) => {
+}: QueryProps) => {
   const [data, setData] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
