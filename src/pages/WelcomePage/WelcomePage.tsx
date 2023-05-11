@@ -1,4 +1,5 @@
 import Container from 'components/Container/Container';
+import { DocExplorer } from 'components/DocExplorer/DocExplorer';
 
 export const WelcomePage = () => {
   return (
@@ -14,7 +15,8 @@ export const WelcomePage = () => {
             alt="background_image"
           />
           <div className="absolute mt-[10vh] p-8">
-            <div className="text-black">WelcomePage</div>
+            fdasfds
+            <DocExplorer />
           </div>
         </div>
       </Container>
