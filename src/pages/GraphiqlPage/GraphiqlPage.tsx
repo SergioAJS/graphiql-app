@@ -30,7 +30,9 @@ const GraphiqlPage = () => {
   const [headers, setHeaders] = useState('');
   const [graphQuery, setGraphQuery] = useState<QueryProps>({});
   const { data, isLoading, error } = useFetchGraphQuery(graphQuery);
-  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({ duration: 600 });
+  const { getCollapseProps, getToggleProps, isExpanded, setExpanded } = useCollapse({
+    duration: 600,
+  });
   const handleQuery = () => {
     let parsedHeaders = new Headers({ 'Content-Type': 'application/json' });
     let parsedVariables = {};
@@ -65,13 +67,19 @@ const GraphiqlPage = () => {
             <div>
               <TabSelector
                 isActive={selectedTab === 'Variables'}
-                onClick={() => setSelectedTab('Variables')}
+                onClick={() => {
+                  setSelectedTab('Variables');
+                  setExpanded(true);
+                }}
               >
                 Variables
               </TabSelector>
               <TabSelector
                 isActive={selectedTab === 'Headers'}
-                onClick={() => setSelectedTab('Headers')}
+                onClick={() => {
+                  setSelectedTab('Headers');
+                  setExpanded(true);
+                }}
               >
                 Headers
               </TabSelector>
