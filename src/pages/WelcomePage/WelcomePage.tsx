@@ -1,5 +1,4 @@
 import Container from 'components/Container/Container';
-import { DocExplorer } from 'components/DocExplorer/DocExplorer';
 
 export const WelcomePage = () => {
   return (
@@ -14,10 +13,7 @@ export const WelcomePage = () => {
             src="/images/welcome.webp"
             alt="background_image"
           />
-          <div className="absolute mt-[10vh] p-8">
-            fdasfds
-            <DocExplorer />
-          </div>
+          <div className="absolute mt-[10vh] p-8">Welcome Page</div>
         </div>
       </Container>
     </div>
