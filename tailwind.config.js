@@ -6,6 +6,9 @@ export default {
     container: {
       center: true,
     },
+    fontSize: {
+      ssm: ['0.8rem'],
+    },
     extend: {
       keyframes: {
         'open-menu': {

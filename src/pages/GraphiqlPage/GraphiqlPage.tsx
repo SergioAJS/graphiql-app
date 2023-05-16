@@ -1,6 +1,7 @@
 import { ChangeEvent, lazy, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import { TabPanel, useTabs } from 'react-headless-tabs';
+import { useCollapse } from 'react-collapsed';
 
 import { Button } from 'components/Button/Button';
 import {
@@ -31,7 +32,9 @@ const GraphiqlPage = () => {
   const [headers, setHeaders] = useState('');
   const [graphQuery, setGraphQuery] = useState<QueryProps>({});
   const { data, isLoading, error } = useFetchGraphQuery(graphQuery);
-
+  const { getCollapseProps, getToggleProps, isExpanded, setExpanded } = useCollapse({
+    duration: 600,
+  });
   const handleQuery = () => {
     let parsedHeaders = new Headers({ 'Content-Type': 'application/json' });
     let parsedVariables = {};
@@ -66,21 +69,32 @@ const GraphiqlPage = () => {
               }}
               {...EDITOR_STYLES}
             />
-            <nav className="border-b border-gray-300">
-              <TabSelector
-                isActive={selectedTab === 'Variables'}
-                onClick={() => setSelectedTab('Variables')}
-              >
-                Variables
-              </TabSelector>
-              <TabSelector
-                isActive={selectedTab === 'Headers'}
-                onClick={() => setSelectedTab('Headers')}
-              >
-                Headers
-              </TabSelector>
+            <nav className="flex justify-between border-b border-gray-300">
+              <div>
+                <TabSelector
+                  isActive={selectedTab === 'Variables'}
+                  onClick={() => {
+                    setSelectedTab('Variables');
+                    setExpanded(true);
+                  }}
+                >
+                  Variables
+                </TabSelector>
+                <TabSelector
+                  isActive={selectedTab === 'Headers'}
+                  onClick={() => {
+                    setSelectedTab('Headers');
+                    setExpanded(true);
+                  }}
+                >
+                  Headers
+                </TabSelector>
+              </div>
+              <button {...getToggleProps()} className="px-5 text-ssm">
+                {isExpanded ? 'Collapse' : 'Expand'}
+              </button>
             </nav>
-            <div>
+            <section {...getCollapseProps()}>
               <TabPanel hidden={selectedTab !== 'Variables'}>
                 <CodeEditor
                   value={variables}
@@ -99,7 +113,7 @@ const GraphiqlPage = () => {
                   {...EDITOR_STYLES}
                 />
               </TabPanel>
-            </div>
+            </section>
           </div>
           <div className="relative w-1/2 overflow-auto border border-b-0 ">
             {isLoading && <Loading />}
@@ -112,7 +126,7 @@ const GraphiqlPage = () => {
 };
 
 const Loading = () => (
-  <div className="absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col justify-center bg-gray-300 text-center text-2xl">
+  <div className="text-2xl absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col justify-center bg-gray-300 text-center">
     Loading
   </div>
 );
