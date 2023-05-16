@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DEFAULT_URL } from 'redux/useFetchGraphQuery';
 
 export const useFetchSchema = () => {
-  const [data, setData] = useState<GraphQLSchema>();
+  const [data, setData] = useState<GraphQLSchema | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
