@@ -13,9 +13,7 @@ export const WelcomePage = () => {
             src="/images/welcome.webp"
             alt="background_image"
           />
-          <div className="absolute mt-[10vh] p-8">
-            <div className="text-black">WelcomePage</div>
-          </div>
+          <div className="absolute mt-[10vh] p-8">Welcome Page</div>
         </div>
       </Container>
     </div>

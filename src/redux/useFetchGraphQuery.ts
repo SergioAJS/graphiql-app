@@ -20,10 +20,12 @@ export const DEFAULT_QUERY = `query QueryReactions ($first: Int) {
 }
 `;
 
+export const DEFAULT_URL = 'https://api.catalysis-hub.org/graphql';
+
 export const DEFAULT_VARS = { first: 20 };
 
 export const useFetchGraphQuery = ({
-  url = 'https://api.catalysis-hub.org/graphql',
+  url = DEFAULT_URL,
   query = DEFAULT_QUERY,
   variables = DEFAULT_VARS,
   headers = new Headers({ 'Content-Type': 'application/json' }),
