@@ -4,13 +4,10 @@ import { TabPanel, useTabs } from 'react-headless-tabs';
 import { useCollapse } from 'react-collapsed';
 
 import { Button } from 'components/Button/Button';
-import {
-  DEFAULT_QUERY,
-  DEFAULT_VARS,
-  QueryProps,
-  useFetchGraphQuery,
-} from 'redux/useFetchGraphQuery';
 import { TabSelector } from 'components/TabSelector/TabSelector';
+import { DEFAULT_QUERY, DEFAULT_VARS, useGetGraphQLByQuery } from 'redux/api';
+import { QueryProps } from 'types/types';
+import { errorFetchHandler } from 'utils/errorFetchHandler';
 
 const EDITOR_STYLES = {
   className: 'w-auto',
@@ -31,7 +28,7 @@ const GraphiqlPage = () => {
   const [variables, setVariables] = useState(JSON.stringify(DEFAULT_VARS));
   const [headers, setHeaders] = useState('');
   const [graphQuery, setGraphQuery] = useState<QueryProps>({});
-  const { data, isLoading, error } = useFetchGraphQuery(graphQuery);
+  const { data, isFetching, error, isError } = useGetGraphQLByQuery(graphQuery);
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } = useCollapse({
     duration: 600,
   });
@@ -116,8 +113,12 @@ const GraphiqlPage = () => {
             </section>
           </div>
           <div className="relative w-1/2 overflow-auto border border-b-0 ">
-            {isLoading && <Loading />}
-            <CodeEditor value={error || data} readOnly {...EDITOR_STYLES} />
+            {isFetching && <Loading />}
+            <CodeEditor
+              value={isError ? errorFetchHandler(error) : data}
+              readOnly
+              {...EDITOR_STYLES}
+            />
           </div>
         </div>
       </div>

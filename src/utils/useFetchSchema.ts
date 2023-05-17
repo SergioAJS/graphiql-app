@@ -1,6 +1,6 @@
 import { GraphQLSchema, buildClientSchema, getIntrospectionQuery } from 'graphql';
 import { useEffect, useState } from 'react';
-import { DEFAULT_URL } from 'redux/useFetchGraphQuery';
+import { DEFAULT_URL } from 'redux/api';
 
 export const useFetchSchema = () => {
   const [data, setData] = useState<GraphQLSchema | null>(null);
