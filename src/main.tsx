@@ -5,18 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from 'App';
 import './index.css';
-import { UserProvider } from 'utils/userContext';
 import 'translation/i18n';
 import { store } from 'redux/store';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <UserProvider>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </UserProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

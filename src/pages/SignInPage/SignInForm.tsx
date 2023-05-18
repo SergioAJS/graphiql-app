@@ -61,10 +61,10 @@ const SignInForm = () => {
           <div>
             <div className="relative mx-auto mb-5 mt-[12vh] w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
               <div className="text-center">
-                <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">
+                <h2 className="text-2xl block font-bold text-gray-800 dark:text-white">
                   {t('Sign in')}
                 </h2>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                   {t('Dont have an account yet')}?
                   <CustomLink
                     class="font-medium text-blue-600 decoration-2 hover:underline"
@@ -74,7 +74,7 @@ const SignInForm = () => {
                   </CustomLink>
                 </p>
               </div>
-              <div className="flex items-center py-3 text-xs uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
+              <div className="text-xs flex items-center py-3 uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
                 {t('Or')}
               </div>
               <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>

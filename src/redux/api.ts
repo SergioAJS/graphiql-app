@@ -1,26 +1,37 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { QueryProps } from 'types/types';
 
-type Variables = {
-  [x: string]: string;
-};
+export const DEFAULT_QUERY = `query QueryReactions ($first: Int) {
+  reactions(first: $first) {
+    edges {
+      node {
+        Equation
+        chemicalComposition
+        reactionEnergy
+      }
+    }
+  }
+}
+`;
 
-type Props = {
-  query: string;
-  headers?: Headers;
-  variables?: Variables;
-};
+export const DEFAULT_HEADER = { 'Content-Type': 'application/json' };
+
+export const DEFAULT_URL = 'https://api.catalysis-hub.org/graphql';
+
+export const DEFAULT_VARS = { first: 20 };
 
 export const graphQLApi = createApi({
   reducerPath: 'graphQLApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.catalysis-hub.org/graphql' }),
+  baseQuery: fetchBaseQuery({ baseUrl: DEFAULT_URL }),
   endpoints: (builder) => ({
-    getGraphQLBy: builder.query<string, Props>({
-      query: ({ query, variables }) => ({
-        url: '',
+    getGraphQLBy: builder.query<string, QueryProps>({
+      query: ({ url = '', query, variables, headers }) => ({
+        url: url,
         method: 'POST',
-        body: JSON.stringify({ query: query, vairables: variables }),
-        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: query, variables: variables }),
+        headers: headers,
       }),
+      transformResponse: (response) => JSON.stringify(response, null, '\t'),
     }),
   }),
 });

@@ -1,16 +1,15 @@
-import { ChangeEvent, lazy, useState } from 'react';
+import { ChangeEvent, lazy, useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import { TabPanel, useTabs } from 'react-headless-tabs';
 import { useCollapse } from 'react-collapsed';
 
 import { Button } from 'components/Button/Button';
-import {
-  DEFAULT_QUERY,
-  DEFAULT_VARS,
-  QueryProps,
-  useFetchGraphQuery,
-} from 'redux/useFetchGraphQuery';
 import { TabSelector } from 'components/TabSelector/TabSelector';
+import { DEFAULT_HEADER, DEFAULT_QUERY, DEFAULT_VARS, useGetGraphQLByQuery } from 'redux/api';
+import { QueryProps } from 'types/types';
+import { errorFetchHandler } from 'utils/errorFetchHandler';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { setGraphQL } from 'redux/querySlice';
 
 const EDITOR_STYLES = {
   className: 'w-auto',
@@ -27,29 +26,39 @@ const DocTabPanel = lazy(() => import('components/DocTabPanel/DocTabPanel'));
 
 const GraphiqlPage = () => {
   const [selectedTab, setSelectedTab] = useTabs(['Variables', 'Headers']);
-  const [query, setQuery] = useState(DEFAULT_QUERY);
-  const [variables, setVariables] = useState(JSON.stringify(DEFAULT_VARS));
-  const [headers, setHeaders] = useState('');
-  const [graphQuery, setGraphQuery] = useState<QueryProps>({});
-  const { data, isLoading, error } = useFetchGraphQuery(graphQuery);
+  const graphQL = useAppSelector((state) => state.query.graphQL);
+  const dispatch = useAppDispatch();
+  const [graphQuery, setGraphQuery] = useState<QueryProps>({
+    query: DEFAULT_QUERY,
+    variables: DEFAULT_VARS,
+    headers: DEFAULT_HEADER,
+  });
+  const { data, isFetching, error, isError } = useGetGraphQLByQuery(graphQuery);
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } = useCollapse({
     duration: 600,
   });
-  const handleQuery = () => {
-    let parsedHeaders = new Headers({ 'Content-Type': 'application/json' });
+
+  useEffect(() => {
+    if (!graphQL) return;
+    handleQuery();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function handleQuery() {
+    let parsedHeaders = { 'Content-Type': 'application/json' };
     let parsedVariables = {};
     try {
-      parsedVariables = JSON.parse(variables);
+      parsedVariables = JSON.parse(graphQL.variables);
     } catch {
       /* add some logic, for example toast */
     }
     try {
-      parsedHeaders = JSON.parse(headers);
+      parsedHeaders = JSON.parse(graphQL.headers);
     } catch {
       /* add some logic, for example toast */
     }
-    setGraphQuery({ query, variables: parsedVariables, headers: parsedHeaders });
-  };
+    setGraphQuery({ query: graphQL.query, variables: parsedVariables, headers: parsedHeaders });
+  }
 
   return (
     <>
@@ -63,9 +72,14 @@ const GraphiqlPage = () => {
         <div className="relative flex w-full" style={{ backgroundColor: '#f5f5f5' }}>
           <div className="w-1/2 overflow-auto border border-b-0">
             <CodeEditor
-              value={query}
+              value={graphQL.query}
               onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
-                setQuery(evn.target.value);
+                dispatch(
+                  setGraphQL({
+                    ...graphQL,
+                    query: evn.target.value,
+                  })
+                );
               }}
               {...EDITOR_STYLES}
             />
@@ -97,28 +111,45 @@ const GraphiqlPage = () => {
             <section {...getCollapseProps()}>
               <TabPanel hidden={selectedTab !== 'Variables'}>
                 <CodeEditor
-                  value={variables}
+                  value={graphQL.variables}
                   onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
-                    setVariables(evn.target.value);
+                    dispatch(
+                      setGraphQL({
+                        ...graphQL,
+                        variables: evn.target.value,
+                      })
+                    );
                   }}
                   {...EDITOR_STYLES}
                 />
               </TabPanel>
               <TabPanel hidden={selectedTab !== 'Headers'}>
                 <CodeEditor
-                  value={headers}
+                  value={graphQL.headers}
                   onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
-                    setHeaders(evn.target.value);
+                    dispatch(
+                      setGraphQL({
+                        ...graphQL,
+                        headers: evn.target.value,
+                      })
+                    );
                   }}
                   {...EDITOR_STYLES}
                 />
               </TabPanel>
             </section>
           </div>
-          <div className="relative w-1/2 overflow-auto border border-b-0 ">
-            {isLoading && <Loading />}
-            <CodeEditor value={error || data} readOnly {...EDITOR_STYLES} />
-          </div>
+          {isFetching ? (
+            <Loading />
+          ) : (
+            <div className="relative w-1/2 overflow-auto border border-b-0 ">
+              <CodeEditor
+                value={isError ? errorFetchHandler(error) : data}
+                readOnly
+                {...EDITOR_STYLES}
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -126,7 +157,7 @@ const GraphiqlPage = () => {
 };
 
 const Loading = () => (
-  <div className="text-2xl absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col justify-center bg-gray-300 text-center">
+  <div className="text-2xl relative z-10 flex w-1/2 flex-col justify-center bg-gray-300 text-center">
     Loading
   </div>
 );
