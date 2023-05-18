@@ -3,15 +3,15 @@ import { ReactComponent as Logo } from 'assets/logo.svg';
 import { useState } from 'react';
 import { Language } from 'models/Language';
 import { enumToArray } from 'utils/enumToArray';
-import { UserContext } from 'utils/userContext';
-import { useContext } from 'react';
 import { signOutUser } from 'utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useScrollPosition } from 'hooks/useScrollPosition';
 import Container from 'components/Container/Container';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from 'redux/hooks';
 
 export const Header = () => {
+  const { user } = useAppSelector((state) => state.user);
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setCurrentLang] = useState(
     (localStorage.getItem('lang') as keyof typeof Language) || Language.en
@@ -35,7 +35,6 @@ export const Header = () => {
     setLiClass(false);
   };
 
-  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const signOut = () => {
@@ -60,7 +59,7 @@ export const Header = () => {
             <CustomLink to="/" onClick={() => setMenuOpen(false)}>
               <Logo />
             </CustomLink>
-            <p className="mb-1 select-none text-lg">Catalysis Hub</p>
+            <p className="text-lg mb-1 select-none">Catalysis Hub</p>
           </div>
           <div className="flex items-center justify-center gap-5">
             <div className="hidden items-center gap-5 md:flex" aria-label="main">
