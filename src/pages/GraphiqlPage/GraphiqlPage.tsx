@@ -157,7 +157,7 @@ const GraphiqlPage = () => {
 };
 
 const Loading = () => (
-  <div className="text-2xlrelative z-10 flex w-1/2 flex-col justify-center bg-gray-300 text-center">
+  <div className="text-2xl relative z-10 flex w-1/2 flex-col justify-center bg-gray-300 text-center">
     Loading
   </div>
 );

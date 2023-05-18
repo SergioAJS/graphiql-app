@@ -20,6 +20,7 @@ const GraphiqlPage = lazy(() => import('pages/GraphiqlPage/GraphiqlPage'));
 
 function App() {
   const { user } = useAppSelector((state) => state.user);
+  const { isLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -36,6 +37,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const Loading = () => (
+    <div className="text-2xl absolute flex h-full w-full flex-col justify-center bg-gray-300 text-center">
+      Loading...
+    </div>
+  );
+
   const ProtectedRoute = ({ redirectPath = '/', children, isAllowed = true }: Props) => {
     if (!isAllowed) {
       return <Navigate to={redirectPath} />;
@@ -46,7 +53,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={isLoading ? <Loading /> : <Layout />}>
           <Route index element={<WelcomePage />} />
           <Route
             path="graphiql"
