@@ -33,7 +33,7 @@ const GraphiqlPage = () => {
     duration: 600,
   });
   const handleQuery = () => {
-    let parsedHeaders = new Headers({ 'Content-Type': 'application/json' });
+    let parsedHeaders = { 'Content-Type': 'application/json' };
     let parsedVariables = {};
     try {
       parsedVariables = JSON.parse(variables);
