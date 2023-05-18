@@ -1,29 +1,35 @@
-import { QueryProps } from 'types/types';
-import { DEFAULT_QUERY, DEFAULT_VARS } from './api';
+import { DEFAULT_HEADER, DEFAULT_QUERY, DEFAULT_VARS } from './api';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+interface IGraphQLProps {
+  headers: string;
+  query: string;
+  url: string;
+  variables: string;
+}
+
 export interface IQueryState {
-  query: QueryProps;
+  graphQL: IGraphQLProps;
 }
 
 const initialState: IQueryState = {
-  query: {
-    headers: { 'Content-Type': 'application/json' },
+  graphQL: {
+    headers: JSON.stringify(DEFAULT_HEADER),
     query: DEFAULT_QUERY,
     url: '',
-    variables: DEFAULT_VARS,
+    variables: JSON.stringify(DEFAULT_VARS),
   },
 };
 
 const querySlice = createSlice({
-  name: 'query',
+  name: 'graphQL',
   initialState,
   reducers: {
-    setQuery(state, action: PayloadAction<QueryProps>) {
-      state.query = action.payload;
+    setGraphQL(state, action: PayloadAction<IGraphQLProps>) {
+      state.graphQL = action.payload;
     },
   },
 });
 
 export default querySlice.reducer;
-export const { setQuery } = querySlice.actions;
+export const { setGraphQL } = querySlice.actions;

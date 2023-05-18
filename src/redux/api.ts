@@ -6,12 +6,15 @@ export const DEFAULT_QUERY = `query QueryReactions ($first: Int) {
     edges {
       node {
         Equation
+        chemicalComposition
         reactionEnergy
       }
     }
   }
 }
 `;
+
+export const DEFAULT_HEADER = { 'Content-Type': 'application/json' };
 
 export const DEFAULT_URL = 'https://api.catalysis-hub.org/graphql';
 
@@ -22,11 +25,11 @@ export const graphQLApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: DEFAULT_URL }),
   endpoints: (builder) => ({
     getGraphQLBy: builder.query<string, QueryProps>({
-      query: ({ url = '', query = DEFAULT_QUERY, variables = DEFAULT_VARS }) => ({
+      query: ({ url = '', query, variables, headers }) => ({
         url: url,
         method: 'POST',
         body: JSON.stringify({ query: query, variables: variables }),
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
       }),
       transformResponse: (response) => JSON.stringify(response, null, '\t'),
     }),
