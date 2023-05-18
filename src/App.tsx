@@ -8,7 +8,7 @@ import { ReactNode, Suspense, lazy, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { onAuthStateChangeListener } from 'utils/firebase';
 import { User } from 'firebase/auth';
-import { login, logout } from 'redux/userSlice';
+import { login, logout, setLoading } from 'redux/userSlice';
 
 type Props = {
   children?: ReactNode;
@@ -23,12 +23,14 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(setLoading(true));
     const unsubscribe = onAuthStateChangeListener(async (user: User | null) => {
       if (user) {
         dispatch(login(true));
       } else {
         dispatch(logout());
       }
+      dispatch(setLoading(false));
     });
     return unsubscribe;
     // eslint-disable-next-line react-hooks/exhaustive-deps

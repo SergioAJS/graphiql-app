@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface IUserState {
   user: boolean | null;
+  isLoading: boolean;
 }
 
 const initialState: IUserState = {
   user: null,
+  isLoading: true,
 };
 
 export const userSlice = createSlice({
@@ -18,8 +20,11 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.user = null;
     },
+    setLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setLoading } = userSlice.actions;

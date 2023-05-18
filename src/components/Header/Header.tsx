@@ -12,6 +12,7 @@ import { useAppSelector } from 'redux/hooks';
 
 export const Header = () => {
   const { user } = useAppSelector((state) => state.user);
+  const { isLoading } = useAppSelector((state) => state.user);
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setCurrentLang] = useState(
     (localStorage.getItem('lang') as keyof typeof Language) || Language.en
@@ -68,7 +69,7 @@ export const Header = () => {
                   {t('Welcome')}
                 </CustomLink>
               </div>
-              {user ? (
+              {isLoading ? null : user ? (
                 <div className="text-center">
                   <CustomLink
                     class="transition-colors duration-300 hover:text-blue-500"
@@ -80,7 +81,7 @@ export const Header = () => {
               ) : (
                 <></>
               )}
-              {user ? (
+              {isLoading ? null : user ? (
                 <button className="header-button" onClick={signOut}>
                   {t('Sign Out')}
                 </button>
@@ -175,7 +176,7 @@ export const Header = () => {
             >
               {t('Welcome')}
             </CustomLink>
-            {user ? (
+            {isLoading ? null : user ? (
               <CustomLink
                 class="transition-colors duration-300 hover:text-blue-500"
                 to="/graphiql"
@@ -186,7 +187,7 @@ export const Header = () => {
             ) : (
               <></>
             )}
-            {user ? (
+            {isLoading ? null : user ? (
               <button className="header-button" onClick={signOut}>
                 {t('Sign Out')}
               </button>
