@@ -10,6 +10,7 @@ import { QueryProps } from 'types/types';
 import { errorFetchHandler } from 'utils/errorFetchHandler';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { setGraphQL } from 'redux/querySlice';
+import { Loading } from 'components/Loading/Loading';
 
 const EDITOR_STYLES = {
   className: 'w-auto',
@@ -140,7 +141,7 @@ const GraphiqlPage = () => {
             </section>
           </div>
           {isFetching ? (
-            <Loading />
+            <Loading className="w-1/2" />
           ) : (
             <div className="relative w-1/2 overflow-auto border border-b-0 ">
               <CodeEditor
@@ -155,11 +156,5 @@ const GraphiqlPage = () => {
     </>
   );
 };
-
-const Loading = () => (
-  <div className="text-2xl relative z-10 flex w-1/2 flex-col justify-center bg-gray-300 text-center">
-    Loading
-  </div>
-);
 
 export default GraphiqlPage;

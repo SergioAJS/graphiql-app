@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IntrospectionQuery, getIntrospectionQuery } from 'graphql';
+
 import { QueryProps } from 'types/types';
 
 export const DEFAULT_QUERY = `query QueryReactions ($first: Int) {
@@ -25,15 +27,24 @@ export const graphQLApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: DEFAULT_URL }),
   endpoints: (builder) => ({
     getGraphQLBy: builder.query<string, QueryProps>({
-      query: ({ url = '', query, variables, headers }) => ({
-        url: url,
+      query: ({ query, variables, headers }) => ({
+        url: '',
         method: 'POST',
         body: JSON.stringify({ query: query, variables: variables }),
         headers: headers,
       }),
       transformResponse: (response) => JSON.stringify(response, null, '\t'),
     }),
+    getGraphQLSchema: builder.query<string, QueryProps>({
+      query: ({ url = '' }) => ({
+        url: url,
+        method: 'POST',
+        body: JSON.stringify({ query: getIntrospectionQuery() }),
+        headers: { 'Content-Type': 'application/json' },
+      }),
+      transformResponse: (response: { data: IntrospectionQuery }) => JSON.stringify(response.data),
+    }),
   }),
 });
 
-export const { useGetGraphQLByQuery } = graphQLApi;
+export const { useGetGraphQLByQuery, useGetGraphQLSchemaQuery } = graphQLApi;

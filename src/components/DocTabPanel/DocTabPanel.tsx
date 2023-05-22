@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { DocExplorer } from '@usebruno/graphql-docs';
 
-import { useFetchSchema } from 'utils/useFetchSchema';
 import { Button } from 'components/Button/Button';
+import { useGetGraphQLSchemaQuery } from 'redux/api';
+import { buildClientSchema } from 'graphql/utilities';
 
 const DocTabPanel = () => {
   const [showDoc, setShowDoc] = useState(false);
-  const { data } = useFetchSchema();
+  const { data } = useGetGraphQLSchemaQuery({ url: '' });
   const toggleDoc = () => setShowDoc((showDoc) => !showDoc);
 
   return (
@@ -18,7 +19,7 @@ const DocTabPanel = () => {
         {data && (
           <>
             <div className={`graphql-docs-explorer-container ${showDoc ? '' : 'hidden'}`}>
-              <DocExplorer schema={data}>
+              <DocExplorer schema={buildClientSchema(JSON.parse(data))}>
                 <button
                   className="mr-2"
                   onClick={toggleDoc}
