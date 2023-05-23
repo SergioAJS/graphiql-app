@@ -11,6 +11,7 @@ import { errorFetchHandler } from 'utils/errorFetchHandler';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { setGraphQL } from 'redux/querySlice';
 import { Loading } from 'components/Loading/Loading';
+import { ReactComponent as PlayIcon } from 'assets/play.svg';
 
 const EDITOR_STYLES = {
   className: 'w-auto',
@@ -69,7 +70,7 @@ const GraphiqlPage = () => {
       <div className="relative mt-16 flex h-[93vh] flex-grow">
         <div className="absolute left-2/4 top-1 z-20 -translate-x-1/2">
           <Button size="small" onClick={handleQuery}>
-            Query
+            <PlayIcon />
           </Button>
         </div>
         <div className="relative flex w-full" style={{ backgroundColor: '#f5f5f5' }}>
