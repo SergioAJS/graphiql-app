@@ -66,7 +66,7 @@ const GraphiqlPage = () => {
       <div className="absolute flex h-full min-h-full w-full flex-row ">
         <DocTabPanel />
       </div>
-      <div className="relative mt-16 flex h-[calc(80vh-16rem)] flex-grow">
+      <div className="relative mt-16 flex h-[93vh] flex-grow">
         <div className="absolute left-2/4 top-1 z-20 -translate-x-1/2">
           <Button onClick={handleQuery}>Query</Button>
         </div>
