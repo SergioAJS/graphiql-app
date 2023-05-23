@@ -13,7 +13,11 @@ const DocTabPanel = () => {
   return (
     <>
       <div className="absolute left-full top-1/4 z-30 block -translate-x-full -translate-y-1/2 -rotate-90">
-        {data && <Button onClick={toggleDoc}>Schema</Button>}
+        {data && (
+          <Button transform size="small" variant="inform" onClick={toggleDoc}>
+            Schema
+          </Button>
+        )}
       </div>
       <div className="relative flex flex-grow flex-col">
         {data && (

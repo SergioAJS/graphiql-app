@@ -68,7 +68,9 @@ const GraphiqlPage = () => {
       </div>
       <div className="relative mt-16 flex h-[93vh] flex-grow">
         <div className="absolute left-2/4 top-1 z-20 -translate-x-1/2">
-          <Button onClick={handleQuery}>Query</Button>
+          <Button size="small" onClick={handleQuery}>
+            Query
+          </Button>
         </div>
         <div className="relative flex w-full" style={{ backgroundColor: '#f5f5f5' }}>
           <div className="w-1/2 overflow-auto border border-b-0">
