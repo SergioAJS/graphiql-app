@@ -10,6 +10,8 @@ import { onAuthStateChangeListener } from 'utils/firebase';
 import { User } from 'firebase/auth';
 import { login, logout, setLoading } from 'redux/userSlice';
 import { Loading } from 'components/Loading/Loading';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from 'components/ErrorFallback/ErrorFallback';
 
 type Props = {
   children?: ReactNode;
@@ -57,9 +59,11 @@ function App() {
             path="graphiql"
             element={
               <ProtectedRoute isAllowed={user}>
-                <Suspense>
-                  <GraphiqlPage />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorFallback}>
+                  <Suspense>
+                    <GraphiqlPage />
+                  </Suspense>
+                </ErrorBoundary>
               </ProtectedRoute>
             }
           />
