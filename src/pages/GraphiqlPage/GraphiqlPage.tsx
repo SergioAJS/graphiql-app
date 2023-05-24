@@ -89,7 +89,11 @@ const GraphiqlPage = () => {
                 {...EDITOR_OPTIONS}
               />
             </div>
-            <div className={`${isExpanded ? 'min-h-[33.333333%]' : 'max-h-[33.333333%]'}`}>
+            <div
+              className={`flex flex-col ${
+                isExpanded ? 'max-h-[33.3333%] min-h-[33.3333%]' : 'max-h-[33.3333%]'
+              }`}
+            >
               <nav className="flex justify-between border-b border-gray-300">
                 <div>
                   <TabSelector
@@ -115,7 +119,7 @@ const GraphiqlPage = () => {
                   {isExpanded ? 'Collapse' : 'Expand'}
                 </button>
               </nav>
-              <section {...getCollapseProps()} className="overflow-auto">
+              <section {...getCollapseProps()} className="overflow-hidden">
                 <TabPanel hidden={selectedTab !== 'Variables'}>
                   <CodeEditor
                     value={graphQL.variables}
