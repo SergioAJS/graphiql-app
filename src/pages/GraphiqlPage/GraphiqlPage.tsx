@@ -13,7 +13,7 @@ import { setGraphQL } from 'redux/querySlice';
 import { Loading } from 'components/Loading/Loading';
 import { ReactComponent as PlayIcon } from 'assets/play.svg';
 
-const EDITOR_STYLES = {
+const EDITOR_OPTIONS = {
   className: 'w-auto',
   language: 'graphql',
   style: {
@@ -74,74 +74,78 @@ const GraphiqlPage = () => {
           </Button>
         </div>
         <div className="relative flex w-full" style={{ backgroundColor: '#f5f5f5' }}>
-          <div className="w-1/2 overflow-auto border border-b-0">
-            <CodeEditor
-              value={graphQL.query}
-              onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
-                dispatch(
-                  setGraphQL({
-                    ...graphQL,
-                    query: evn.target.value,
-                  })
-                );
-              }}
-              {...EDITOR_STYLES}
-            />
-            <nav className="flex justify-between border-b border-gray-300">
-              <div>
-                <TabSelector
-                  isActive={selectedTab === 'Variables'}
-                  onClick={() => {
-                    setSelectedTab('Variables');
-                    setExpanded(true);
-                  }}
-                >
-                  Variables
-                </TabSelector>
-                <TabSelector
-                  isActive={selectedTab === 'Headers'}
-                  onClick={() => {
-                    setSelectedTab('Headers');
-                    setExpanded(true);
-                  }}
-                >
-                  Headers
-                </TabSelector>
-              </div>
-              <button {...getToggleProps()} className="px-5 text-ssm">
-                {isExpanded ? 'Collapse' : 'Expand'}
-              </button>
-            </nav>
-            <section {...getCollapseProps()}>
-              <TabPanel hidden={selectedTab !== 'Variables'}>
-                <CodeEditor
-                  value={graphQL.variables}
-                  onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
-                    dispatch(
-                      setGraphQL({
-                        ...graphQL,
-                        variables: evn.target.value,
-                      })
-                    );
-                  }}
-                  {...EDITOR_STYLES}
-                />
-              </TabPanel>
-              <TabPanel hidden={selectedTab !== 'Headers'}>
-                <CodeEditor
-                  value={graphQL.headers}
-                  onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
-                    dispatch(
-                      setGraphQL({
-                        ...graphQL,
-                        headers: evn.target.value,
-                      })
-                    );
-                  }}
-                  {...EDITOR_STYLES}
-                />
-              </TabPanel>
-            </section>
+          <div className="flex w-1/2 flex-col justify-between border border-b-0">
+            <div className="overflow-auto">
+              <CodeEditor
+                value={graphQL.query}
+                onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
+                  dispatch(
+                    setGraphQL({
+                      ...graphQL,
+                      query: evn.target.value,
+                    })
+                  );
+                }}
+                {...EDITOR_OPTIONS}
+              />
+            </div>
+            <div className={`${isExpanded ? 'min-h-[33.333333%]' : 'max-h-[33.333333%]'}`}>
+              <nav className="flex justify-between border-b border-gray-300">
+                <div>
+                  <TabSelector
+                    isActive={selectedTab === 'Variables'}
+                    onClick={() => {
+                      setSelectedTab('Variables');
+                      setExpanded(true);
+                    }}
+                  >
+                    Variables
+                  </TabSelector>
+                  <TabSelector
+                    isActive={selectedTab === 'Headers'}
+                    onClick={() => {
+                      setSelectedTab('Headers');
+                      setExpanded(true);
+                    }}
+                  >
+                    Headers
+                  </TabSelector>
+                </div>
+                <button {...getToggleProps()} className="px-5 text-ssm">
+                  {isExpanded ? 'Collapse' : 'Expand'}
+                </button>
+              </nav>
+              <section {...getCollapseProps()} className="overflow-auto">
+                <TabPanel hidden={selectedTab !== 'Variables'}>
+                  <CodeEditor
+                    value={graphQL.variables}
+                    onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
+                      dispatch(
+                        setGraphQL({
+                          ...graphQL,
+                          variables: evn.target.value,
+                        })
+                      );
+                    }}
+                    {...EDITOR_OPTIONS}
+                  />
+                </TabPanel>
+                <TabPanel hidden={selectedTab !== 'Headers'}>
+                  <CodeEditor
+                    value={graphQL.headers}
+                    onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
+                      dispatch(
+                        setGraphQL({
+                          ...graphQL,
+                          headers: evn.target.value,
+                        })
+                      );
+                    }}
+                    {...EDITOR_OPTIONS}
+                  />
+                </TabPanel>
+              </section>
+            </div>
           </div>
           {isFetching ? (
             <Loading className="w-1/2" />
@@ -150,7 +154,7 @@ const GraphiqlPage = () => {
               <CodeEditor
                 value={isError ? errorFetchHandler(error) : data}
                 readOnly
-                {...EDITOR_STYLES}
+                {...EDITOR_OPTIONS}
               />
             </div>
           )}
