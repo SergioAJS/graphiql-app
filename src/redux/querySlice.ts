@@ -4,7 +4,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 interface IGraphQLProps {
   headers: string;
   query: string;
-  url: string;
   variables: string;
 }
 
@@ -16,7 +15,6 @@ const initialState: IQueryState = {
   graphQL: {
     headers: JSON.stringify(DEFAULT_HEADER),
     query: DEFAULT_QUERY,
-    url: '',
     variables: JSON.stringify(DEFAULT_VARS),
   },
 };

@@ -9,6 +9,9 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { onAuthStateChangeListener } from 'utils/firebase';
 import { User } from 'firebase/auth';
 import { login, logout, setLoading } from 'redux/userSlice';
+import { Loading } from 'components/Loading/Loading';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from 'components/ErrorFallback/ErrorFallback';
 
 type Props = {
   children?: ReactNode;
@@ -37,12 +40,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const Loading = () => (
-    <div className="text-2xl absolute flex h-full w-full flex-col justify-center bg-gray-300 text-center">
-      Loading...
-    </div>
-  );
-
   const ProtectedRoute = ({ redirectPath = '/', children, isAllowed = true }: Props) => {
     if (!isAllowed) {
       return <Navigate to={redirectPath} />;
@@ -53,15 +50,20 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={isLoading ? <Loading /> : <Layout />}>
+        <Route
+          path="/"
+          element={isLoading ? <Loading className="h-full w-full grow" /> : <Layout />}
+        >
           <Route index element={<WelcomePage />} />
           <Route
             path="graphiql"
             element={
               <ProtectedRoute isAllowed={user}>
-                <Suspense>
-                  <GraphiqlPage />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorFallback}>
+                  <Suspense>
+                    <GraphiqlPage />
+                  </Suspense>
+                </ErrorBoundary>
               </ProtectedRoute>
             }
           />
