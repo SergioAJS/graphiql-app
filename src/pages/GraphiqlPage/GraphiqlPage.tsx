@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { setGraphQL } from 'redux/querySlice';
 import { Loading } from 'components/Loading/Loading';
 import { ReactComponent as PlayIcon } from 'assets/play.svg';
+import { ToastContainer } from 'components/Toast/ToastContainer';
+import { addToast } from 'redux/toastSlice';
 
 const EDITOR_OPTIONS = {
   className: 'w-auto',
@@ -29,6 +31,7 @@ const DocTabPanel = lazy(() => import('components/DocTabPanel/DocTabPanel'));
 const GraphiqlPage = () => {
   const [selectedTab, setSelectedTab] = useTabs(['Variables', 'Headers']);
   const graphQL = useAppSelector((state) => state.query.graphQL);
+  const toasts = useAppSelector((state) => state.toastList.toasts);
   const dispatch = useAppDispatch();
   const [graphQuery, setGraphQuery] = useState<QueryProps>({
     query: DEFAULT_QUERY,
@@ -47,23 +50,39 @@ const GraphiqlPage = () => {
   }, []);
 
   function handleQuery() {
+    let errorVariables = false;
     let parsedHeaders = { 'Content-Type': 'application/json' };
     let parsedVariables = {};
     try {
       parsedVariables = JSON.parse(graphQL.variables);
     } catch {
-      /* add some logic, for example toast */
+      errorVariables = true;
+      dispatch(
+        addToast({
+          message: 'Variables section cannot be parsed',
+          type: 'danger',
+          id: Date.now(),
+        })
+      );
     }
     try {
-      parsedHeaders = JSON.parse(graphQL.headers);
+      parsedHeaders = { ...parsedHeaders, ...JSON.parse(graphQL.headers) };
     } catch {
-      /* add some logic, for example toast */
+      dispatch(
+        addToast({
+          message: 'Headers section cannot be parsed',
+          type: 'danger',
+          id: Date.now(),
+        })
+      );
     }
+    if (errorVariables) return;
     setGraphQuery({ query: graphQL.query, variables: parsedVariables, headers: parsedHeaders });
   }
 
   return (
     <>
+      <ToastContainer toasts={toasts} />
       <div className="absolute flex h-full min-h-full w-full flex-row ">
         <DocTabPanel />
       </div>
@@ -156,7 +175,7 @@ const GraphiqlPage = () => {
           ) : (
             <div className="relative w-1/2 overflow-auto border border-b-0 ">
               <CodeEditor
-                value={isError ? errorFetchHandler(error) : data}
+                value={isError ? errorFetchHandler(error) : JSON.stringify(data, null, '\t')}
                 readOnly
                 {...EDITOR_OPTIONS}
               />
