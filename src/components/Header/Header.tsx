@@ -59,7 +59,7 @@ export const Header = () => {
             <CustomLink to="/" onClick={() => setMenuOpen(false)}>
               <Logo />
             </CustomLink>
-            <p className="text-lg mb-1 select-none">Catalysis Hub</p>
+            <p className="mb-1 select-none text-lg">Catalysis Hub</p>
           </div>
           <div className="flex items-center justify-center gap-5">
             <div className="hidden items-center gap-5 md:flex" aria-label="main">
@@ -68,18 +68,18 @@ export const Header = () => {
                   {t('Welcome')}
                 </CustomLink>
               </div>
-              {isUserLoading ? null : isUserAuth ? (
-                <div className="text-center">
-                  <CustomLink
-                    class="transition-colors duration-300 hover:text-blue-500"
-                    to="/graphiql"
-                  >
-                    GraphiQL
-                  </CustomLink>
-                </div>
-              ) : (
-                <></>
-              )}
+              {isUserLoading
+                ? null
+                : isUserAuth && (
+                    <div className="text-center">
+                      <CustomLink
+                        class="transition-colors duration-300 hover:text-blue-500"
+                        to="/graphiql"
+                      >
+                        GraphiQL
+                      </CustomLink>
+                    </div>
+                  )}
               {isUserLoading ? null : isUserAuth ? (
                 <button className="header-button" onClick={signOut}>
                   {t('Sign Out')}
@@ -175,17 +175,17 @@ export const Header = () => {
             >
               {t('Welcome')}
             </CustomLink>
-            {isUserLoading ? null : isUserAuth ? (
-              <CustomLink
-                class="transition-colors duration-300 hover:text-blue-500"
-                to="/graphiql"
-                onClick={handleBurgerMenu}
-              >
-                GraphiQL
-              </CustomLink>
-            ) : (
-              <></>
-            )}
+            {isUserLoading
+              ? null
+              : isUserAuth && (
+                  <CustomLink
+                    class="transition-colors duration-300 hover:text-blue-500"
+                    to="/graphiql"
+                    onClick={handleBurgerMenu}
+                  >
+                    GraphiQL
+                  </CustomLink>
+                )}
             {isUserLoading ? null : isUserAuth ? (
               <button className="header-button" onClick={signOut}>
                 {t('Sign Out')}

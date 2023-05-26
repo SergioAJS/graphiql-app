@@ -18,10 +18,10 @@ export const TeamCard = ({ image, title, name, description, link, color = '#6b72
         <p className="text-ssm uppercase text-gray-500">{title}</p>
       </div>
     </div>
-    <p className="mt-3 text-gray-500">{description}</p>
+    <p className="mt-3 text-gray-800 dark:text-gray-200">{description}</p>
     <div className="mt-auto space-x-1 ">
       <a
-        className="inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-500 hover:text-gray-800 hover:shadow-sm dark:border-gray-700 dark:hover:text-gray-200 dark:hover:shadow-slate-700/[.7]"
+        className="mt-2 inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-500 hover:text-gray-800 hover:shadow-sm dark:border-gray-700 dark:hover:text-gray-200 dark:hover:shadow-slate-700/[.7]"
         href={link}
         target="_blank"
         rel="noreferrer"

@@ -134,7 +134,7 @@ const GraphiqlPage = () => {
                     Headers
                   </TabSelector>
                 </div>
-                <button {...getToggleProps()} className="px-5 text-ssm">
+                <button {...getToggleProps()} className="text-ssm px-5">
                   {isExpanded ? 'Collapse' : 'Expand'}
                 </button>
               </nav>

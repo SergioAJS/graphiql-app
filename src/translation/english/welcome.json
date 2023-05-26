@@ -1,0 +1,5 @@
+{
+  "yuri": "Created sign-up and sign-in forms, user authorization via Firebase. Set up RTK Query and Store to manage GraphQL API.",
+  "serj": "Team and project manager. Pages routing setup. User interface design and styling pages.",
+  "irina": "Configured i18next to manage project localization. Worked on sections of GraphQL editor."
+}
