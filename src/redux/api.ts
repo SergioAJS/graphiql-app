@@ -43,6 +43,15 @@ export const graphQLApi = createApi({
       }),
       transformResponse: (response: { data: IntrospectionQuery }) => JSON.stringify(response.data),
     }),
+    getGraphQLSchema: builder.query<string, QueryProps>({
+      query: ({ url = '' }) => ({
+        url: url,
+        method: 'POST',
+        body: JSON.stringify({ query: getIntrospectionQuery() }),
+        headers: { 'Content-Type': 'application/json' },
+      }),
+      transformResponse: (response: { data: IntrospectionQuery }) => JSON.stringify(response.data),
+    }),
   }),
 });
 
