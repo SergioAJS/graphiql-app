@@ -11,8 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'redux/hooks';
 
 export const Header = () => {
-  const { user } = useAppSelector((state) => state.user);
-  const { isLoading } = useAppSelector((state) => state.user);
+  const { isUserAuth, isUserLoading } = useAppSelector((state) => state.user.userAuth);
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setCurrentLang] = useState(
     (localStorage.getItem('lang') as keyof typeof Language) || Language.en
@@ -69,7 +68,7 @@ export const Header = () => {
                   {t('Welcome')}
                 </CustomLink>
               </div>
-              {isLoading ? null : user ? (
+              {isUserLoading ? null : isUserAuth ? (
                 <div className="text-center">
                   <CustomLink
                     class="transition-colors duration-300 hover:text-blue-500"
@@ -81,7 +80,7 @@ export const Header = () => {
               ) : (
                 <></>
               )}
-              {isLoading ? null : user ? (
+              {isUserLoading ? null : isUserAuth ? (
                 <button className="header-button" onClick={signOut}>
                   {t('Sign Out')}
                 </button>
@@ -176,7 +175,7 @@ export const Header = () => {
             >
               {t('Welcome')}
             </CustomLink>
-            {isLoading ? null : user ? (
+            {isUserLoading ? null : isUserAuth ? (
               <CustomLink
                 class="transition-colors duration-300 hover:text-blue-500"
                 to="/graphiql"
@@ -187,7 +186,7 @@ export const Header = () => {
             ) : (
               <></>
             )}
-            {isLoading ? null : user ? (
+            {isUserLoading ? null : isUserAuth ? (
               <button className="header-button" onClick={signOut}>
                 {t('Sign Out')}
               </button>
