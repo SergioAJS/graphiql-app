@@ -11,8 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from 'redux/hooks';
 
 export const Header = () => {
-  const { user } = useAppSelector((state) => state.user);
-  const { isLoading } = useAppSelector((state) => state.user);
+  const { isUserAuth, isUserLoading } = useAppSelector((state) => state.user.userAuth);
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setCurrentLang] = useState(
     (localStorage.getItem('lang') as keyof typeof Language) || Language.en
@@ -60,7 +59,7 @@ export const Header = () => {
             <CustomLink to="/" onClick={() => setMenuOpen(false)}>
               <Logo />
             </CustomLink>
-            <p className="text-lg mb-1 select-none">Catalysis Hub</p>
+            <p className="mb-1 select-none text-lg">Catalysis Hub</p>
           </div>
           <div className="flex items-center justify-center gap-5">
             <div className="hidden items-center gap-5 md:flex" aria-label="main">
@@ -69,19 +68,19 @@ export const Header = () => {
                   {t('Welcome')}
                 </CustomLink>
               </div>
-              {isLoading ? null : user ? (
-                <div className="text-center">
-                  <CustomLink
-                    class="transition-colors duration-300 hover:text-blue-500"
-                    to="/graphiql"
-                  >
-                    GraphiQL
-                  </CustomLink>
-                </div>
-              ) : (
-                <></>
-              )}
-              {isLoading ? null : user ? (
+              {isUserLoading
+                ? null
+                : isUserAuth && (
+                    <div className="text-center">
+                      <CustomLink
+                        class="transition-colors duration-300 hover:text-blue-500"
+                        to="/graphiql"
+                      >
+                        GraphiQL
+                      </CustomLink>
+                    </div>
+                  )}
+              {isUserLoading ? null : isUserAuth ? (
                 <button className="header-button" onClick={signOut}>
                   {t('Sign Out')}
                 </button>
@@ -176,18 +175,18 @@ export const Header = () => {
             >
               {t('Welcome')}
             </CustomLink>
-            {isLoading ? null : user ? (
-              <CustomLink
-                class="transition-colors duration-300 hover:text-blue-500"
-                to="/graphiql"
-                onClick={handleBurgerMenu}
-              >
-                GraphiQL
-              </CustomLink>
-            ) : (
-              <></>
-            )}
-            {isLoading ? null : user ? (
+            {isUserLoading
+              ? null
+              : isUserAuth && (
+                  <CustomLink
+                    class="transition-colors duration-300 hover:text-blue-500"
+                    to="/graphiql"
+                    onClick={handleBurgerMenu}
+                  >
+                    GraphiQL
+                  </CustomLink>
+                )}
+            {isUserLoading ? null : isUserAuth ? (
               <button className="header-button" onClick={signOut}>
                 {t('Sign Out')}
               </button>

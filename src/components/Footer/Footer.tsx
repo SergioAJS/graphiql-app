@@ -2,11 +2,12 @@ import { ReactComponent as RsLogo } from 'assets/rs_school_js.svg';
 import Container from 'components/Container/Container';
 
 type Props = {
-  color: string;
+  color?: string;
 };
 
-const GitHuBIcon = ({ color }: Props) => (
+export const GitHuBIcon = ({ color }: Props) => (
   <svg
+    className="hover:opacity-90"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

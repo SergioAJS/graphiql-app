@@ -22,8 +22,7 @@ type Props = {
 const GraphiqlPage = lazy(() => import('pages/GraphiqlPage/GraphiqlPage'));
 
 function App() {
-  const { user } = useAppSelector((state) => state.user);
-  const { isLoading } = useAppSelector((state) => state.user);
+  const { isUserAuth, isUserLoading } = useAppSelector((state) => state.user.userAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -52,13 +51,13 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={isLoading ? <Loading className="h-full w-full grow" /> : <Layout />}
+          element={isUserLoading ? <Loading className="h-full w-full grow" /> : <Layout />}
         >
           <Route index element={<WelcomePage />} />
           <Route
             path="graphiql"
             element={
-              <ProtectedRoute isAllowed={user}>
+              <ProtectedRoute isAllowed={isUserAuth}>
                 <ErrorBoundary FallbackComponent={ErrorFallback}>
                   <Suspense>
                     <GraphiqlPage />
@@ -67,7 +66,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route element={<ProtectedRoute redirectPath={'/graphiql'} isAllowed={!user} />}>
+          <Route element={<ProtectedRoute redirectPath={'/graphiql'} isAllowed={!isUserAuth} />}>
             <Route path="signin" element={<SignInForm />} />
             <Route path="signup" element={<SignUpForm />} />
           </Route>
