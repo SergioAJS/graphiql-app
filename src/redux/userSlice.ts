@@ -1,13 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface IUserState {
-  user: boolean | null;
-  isLoading: boolean;
+  userAuth: {
+    isUserAuth: boolean | null;
+    isUserLoading: boolean;
+  };
 }
 
 const initialState: IUserState = {
-  user: null,
-  isLoading: true,
+  userAuth: {
+    isUserAuth: null,
+    isUserLoading: true,
+  },
 };
 
 export const userSlice = createSlice({
@@ -15,13 +19,13 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.user = action.payload;
+      state.userAuth.isUserAuth = action.payload;
     },
     logout: (state) => {
-      state.user = null;
+      state.userAuth.isUserAuth = null;
     },
     setLoading: (state, action) => {
-      state.isLoading = action.payload;
+      state.userAuth.isUserLoading = action.payload;
     },
   },
 });

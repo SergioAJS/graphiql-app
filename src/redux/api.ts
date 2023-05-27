@@ -33,7 +33,6 @@ export const graphQLApi = createApi({
         body: JSON.stringify({ query: query, variables: variables }),
         headers: headers,
       }),
-      transformResponse: (response) => JSON.stringify(response, null, '\t'),
     }),
     getGraphQLSchema: builder.query<string, QueryProps>({
       query: ({ url = '' }) => ({
