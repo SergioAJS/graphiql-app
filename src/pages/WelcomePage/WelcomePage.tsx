@@ -29,7 +29,7 @@ export const WelcomePage = () => {
               </p>
               <div className="mt-7 flex flex-row justify-between gap-3 sm:inline-flex">
                 <a target="_blank" rel="noreferrer" href="https://app.rs.school/registry/student">
-                  <Button>Enroll Course</Button>
+                  <Button>{t('Enroll Course')}</Button>
                 </a>
                 {isUserAuth && (
                   <Button onClick={() => navigate('/graphiql')}>{t('Go to Main Page')}</Button>
