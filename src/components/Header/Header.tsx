@@ -51,7 +51,7 @@ export const Header = () => {
     <header
       className={`${
         scrollPosition < 50 ? 'bg-white/50' : 'bg-white'
-      } fixed z-40 flex h-16 w-screen items-center justify-center py-2 transition-colors duration-200`}
+      } fixed z-30 flex h-16 w-screen items-center justify-center py-2 transition-colors duration-200`}
     >
       <Container>
         <nav className="flex w-full items-center justify-between gap-5 font-semibold">
