@@ -59,14 +59,14 @@ const TeamList = [
     description: 'I am an ambitious workaholic, but apart from that, pretty simple person.',
     image: '/images/codewars_sloths.svg',
     name: 'Sergei Aslanov',
-    link: 'https://github.com/Sepulator',
+    link: 'https://github.com/SergioAJS',
   },
   {
     title: 'FRONT-END DEVELOPER',
     description: 'I am an ambitious workaholic, but apart from that, pretty simple person.',
     image: '/images/congrats_sloths.svg',
     name: 'Irina Migunova',
-    link: 'https://github.com/Sepulator',
+    link: 'https://github.com/istairina',
   },
   {
     title: 'FRONT-END DEVELOPER',
