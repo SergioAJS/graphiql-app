@@ -9,6 +9,7 @@ export const WelcomePage = () => {
   const { isUserAuth } = useAppSelector((state) => state.user.userAuth);
   const navigate = useNavigate();
   const { t } = useTranslation('welcome');
+  const team: object[] = t('TeamList', { returnObjects: true });
 
   return (
     <div
@@ -39,7 +40,7 @@ export const WelcomePage = () => {
               {t('Team Members')}
             </h2>
             <div className="grid grid-cols-1 gap-6 opacity-90 sm:grid-cols-2 lg:grid-cols-3">
-              {TeamList.map((item, index) => (
+              {team.map((item, index) => (
                 <TeamCard key={index} {...item} />
               ))}
             </div>
@@ -50,27 +51,3 @@ export const WelcomePage = () => {
     </div>
   );
 };
-
-const TeamList = [
-  {
-    title: 'Team Leader',
-    description: 'I am an ambitious workaholic, but apart from that, pretty simple person.',
-    image: '/images/codewars_sloths.svg',
-    name: 'Sergei Aslanov',
-    link: 'https://github.com/SergioAJS',
-  },
-  {
-    title: 'FRONT-END DEVELOPER',
-    description: 'I am an ambitious workaholic, but apart from that, pretty simple person.',
-    image: '/images/congrats_sloths.svg',
-    name: 'Irina Migunova',
-    link: 'https://github.com/istairina',
-  },
-  {
-    title: 'FRONT-END DEVELOPER',
-    description: 'I am an ambitious workaholic, but apart from that, pretty simple person.',
-    image: '/images/deadline_sloths.svg',
-    name: 'Yuri Skrypal',
-    link: 'https://github.com/Sepulator',
-  },
-];
