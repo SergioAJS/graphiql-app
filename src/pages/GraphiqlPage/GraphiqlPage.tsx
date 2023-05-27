@@ -83,7 +83,7 @@ const GraphiqlPage = () => {
   return (
     <>
       <ToastContainer toasts={toasts} />
-      <div className="absolute flex h-full min-h-full w-full flex-row ">
+      <div className="absolute flex h-full min-h-full w-full flex-row pt-16">
         <DocTabPanel />
       </div>
       <div className="relative mt-16 flex h-[93vh] flex-grow">
