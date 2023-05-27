@@ -10,7 +10,7 @@ export const ToastContainer = ({ toasts }: Props) => {
   const toastRoot = document.getElementById('toast-root') as HTMLDivElement;
 
   return createPortal(
-    <div className="absolute right-2 top-16 z-30 flex flex-col gap-2">
+    <div className="fixed right-2 top-16 z-30 flex flex-col gap-2">
       {toasts.map((toast) => (
         <Toast key={toast.id} {...toast} />
       ))}
