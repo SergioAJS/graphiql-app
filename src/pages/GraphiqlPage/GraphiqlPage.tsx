@@ -2,6 +2,7 @@ import { ChangeEvent, lazy, useEffect, useState } from 'react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import { TabPanel, useTabs } from 'react-headless-tabs';
 import { useCollapse } from 'react-collapsed';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from 'components/Button/Button';
 import { TabSelector } from 'components/TabSelector/TabSelector';
@@ -29,6 +30,7 @@ const EDITOR_OPTIONS = {
 const DocTabPanel = lazy(() => import('components/DocTabPanel/DocTabPanel'));
 
 const GraphiqlPage = () => {
+  const { t } = useTranslation('graphiqlPage');
   const [selectedTab, setSelectedTab] = useTabs(['Variables', 'Headers']);
   const graphQL = useAppSelector((state) => state.query.graphQL);
   const toasts = useAppSelector((state) => state.toastList.toasts);
@@ -135,7 +137,7 @@ const GraphiqlPage = () => {
                   </TabSelector>
                 </div>
                 <button {...getToggleProps()} className="text-ssm px-5">
-                  {isExpanded ? 'Collapse' : 'Expand'}
+                  {t(isExpanded ? 'Collapse' : 'Expand')}
                 </button>
               </nav>
               <section {...getCollapseProps()} className="overflow-hidden">

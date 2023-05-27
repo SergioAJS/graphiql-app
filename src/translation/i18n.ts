@@ -8,6 +8,7 @@ import signUpFormEn from './english/signUpForm.json';
 import textInputFormEn from './english/textInputForm.json';
 import loadingEn from './english/loading.json';
 import welcomeEn from './english/welcome.json';
+import graphiqlPageEn from './english/graphiqlPage.json';
 
 import headerRu from './russian/header.json';
 import notFoundPageRu from './russian/notFoundPage.json';
@@ -16,6 +17,7 @@ import signUpFormRu from './russian/signUpForm.json';
 import textInputFormRu from './russian/textInputForm.json';
 import loadingRu from './russian/loading.json';
 import welcomeRu from './russian/welcome.json';
+import graphiqlPageRu from './russian/graphiqlPage.json';
 
 const resources = {
   en: {
@@ -26,6 +28,7 @@ const resources = {
     textInputForm: textInputFormEn,
     loading: loadingEn,
     welcome: welcomeEn,
+    graphiqlPage: graphiqlPageEn,
   },
   ru: {
     header: headerRu,
@@ -35,6 +38,7 @@ const resources = {
     textInputForm: textInputFormRu,
     loading: loadingRu,
     welcome: welcomeRu,
+    graphiqlPage: graphiqlPageRu,
   },
 };
 
