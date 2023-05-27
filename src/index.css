@@ -37,7 +37,7 @@ body {
 }
 
 .graphql-docs-explorer-container {
-  @apply absolute right-0 z-30 h-full w-[22rem] bg-white outline-none drop-shadow-lg;
+  @apply fixed right-0 z-30 h-full w-[22rem] bg-white outline-none drop-shadow-lg;
 }
 
 .doc-explorer-title {
