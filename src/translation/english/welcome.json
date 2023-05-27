@@ -1,5 +1,12 @@
 {
+  "This work done as a part of": "This work done as a part of ",
+  "Course": "RS School Course",
+  "Task description": "Catalyst Hub is a playground/IDE for GraphQL requests. Also includes authorization/authentication capabilities, to give access to the tool to only to authorized users.",
+  "Enroll Course": "Enroll Course",
+  "Go to Main Page": "Go to Main Page",
+  "Team Members": "Team Members",
   "yuri": "Created sign-up and sign-in forms, user authorization via Firebase. Set up RTK Query and Store to manage GraphQL API.",
   "serj": "Team and project manager. Pages routing setup. User interface design and styling pages.",
-  "irina": "Configured i18next to manage project localization. Worked on sections of GraphQL editor."
+  "irina": "Configured i18next to manage project localization. Worked on sections of GraphQL editor.",
+  "Cite": "“Coming together is a beginning. Keeping together is progress. Working together is success.” - Henry Ford"
 }
