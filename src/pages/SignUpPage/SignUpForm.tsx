@@ -26,11 +26,10 @@ const SignUpForm = () => {
       const response = await createAuthUserWithEmailAndPass(data.Email, data.Password);
       const user = response?.user;
       if (user) {
-        const result = await createUserDocFromAuth(user, {
+        await createUserDocFromAuth(user, {
           displayName: data.Name,
           lastName: data['Last Name'],
         });
-        console.log(result);
       }
     } catch (error: unknown) {
       const message = error instanceof Error && error.code;
@@ -54,10 +53,10 @@ const SignUpForm = () => {
             <div className="w-1/2"></div>
             <div className="relative mx-auto my-5 w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
               <div className="text-center">
-                <h2 className="text-2xl block font-bold text-gray-800 dark:text-white">
+                <h2 className="block text-2xl font-bold text-gray-800 dark:text-white">
                   {t('Sign up')}
                 </h2>
-                <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                   {t('Already have an account')}?
                   <CustomLink
                     class="font-medium text-blue-600 decoration-2 hover:underline"
@@ -67,7 +66,7 @@ const SignUpForm = () => {
                   </CustomLink>
                 </p>
               </div>
-              <div className="text-xs flex items-center py-3 uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
+              <div className="flex items-center py-3 text-xs uppercase text-gray-400 before:mr-6 before:flex-[1_1_0%] before:border-t before:border-gray-200 after:ml-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
                 {t('Or')}
               </div>
               <form className="grid gap-y-4" onSubmit={handleSubmit(onSubmit)}>

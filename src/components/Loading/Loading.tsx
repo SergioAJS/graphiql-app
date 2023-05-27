@@ -11,7 +11,7 @@ export const Loading = ({ className, children = 'Loading...' }: Props) => {
 
   return (
     <div
-      className={`text-2xl relative z-10 flex flex-col justify-center bg-gray-300 text-center ${className}`}
+      className={`relative z-10 flex flex-col justify-center bg-gray-300 text-center text-2xl ${className}`}
     >
       {typeof children === 'string' ? t(children) : children}
     </div>
