@@ -14,7 +14,7 @@ const DocTabPanel = () => {
 
   return (
     <>
-      <div className="absolute left-full top-1/4 z-30 block -translate-x-full -translate-y-1/2 -rotate-90">
+      <div className="fixed left-full top-1/4 z-30 block -translate-x-full -translate-y-1/2 -rotate-90">
         {data && (
           <Button transform size="small" variant="inform" onClick={toggleDoc}>
             {t('Schema')}
