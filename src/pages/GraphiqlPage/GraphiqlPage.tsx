@@ -1,12 +1,20 @@
-import { ChangeEvent, lazy, useEffect, useState } from 'react';
-import CodeEditor from '@uiw/react-textarea-code-editor';
+import { lazy, useEffect, useState } from 'react';
 import { TabPanel, useTabs } from 'react-headless-tabs';
 import { useCollapse } from 'react-collapsed';
 import { useTranslation } from 'react-i18next';
+import { buildClientSchema } from 'graphql/utilities';
+import { graphql } from 'cm6-graphql';
+import CodeMirror from '@uiw/react-codemirror';
 
 import { Button } from 'components/Button/Button';
 import { TabSelector } from 'components/TabSelector/TabSelector';
-import { DEFAULT_HEADER, DEFAULT_QUERY, DEFAULT_VARS, useGetGraphQLByQuery } from 'redux/api';
+import {
+  DEFAULT_HEADER,
+  DEFAULT_QUERY,
+  DEFAULT_VARS,
+  useGetGraphQLByQuery,
+  useGetGraphQLSchemaQuery,
+} from 'redux/api';
 import { QueryProps } from 'types/types';
 import { errorFetchHandler } from 'utils/errorFetchHandler';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -15,6 +23,7 @@ import { Loading } from 'components/Loading/Loading';
 import { ReactComponent as PlayIcon } from 'assets/play.svg';
 import { ToastContainer } from 'components/Toast/ToastContainer';
 import { addToast } from 'redux/toastSlice';
+import { myTheme } from 'utils/myTheme';
 
 const EDITOR_OPTIONS = {
   className: 'w-auto',
@@ -41,6 +50,7 @@ const GraphiqlPage = () => {
     headers: DEFAULT_HEADER,
   });
   const { data, isFetching, error, isError } = useGetGraphQLByQuery(graphQuery);
+  const { data: schema } = useGetGraphQLSchemaQuery({ url: '' });
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } = useCollapse({
     duration: 600,
   });
@@ -56,7 +66,9 @@ const GraphiqlPage = () => {
     let parsedHeaders = { 'Content-Type': 'application/json' };
     let parsedVariables = {};
     try {
-      parsedVariables = JSON.parse(graphQL.variables);
+      if (graphQL.variables) {
+        parsedVariables = JSON.parse(graphQL.variables);
+      }
     } catch {
       errorVariables = true;
       dispatch(
@@ -68,7 +80,9 @@ const GraphiqlPage = () => {
       );
     }
     try {
-      parsedHeaders = { ...parsedHeaders, ...JSON.parse(graphQL.headers) };
+      if (graphQL.headers) {
+        parsedHeaders = { ...parsedHeaders, ...JSON.parse(graphQL.headers) };
+      }
     } catch {
       dispatch(
         addToast({
@@ -97,18 +111,21 @@ const GraphiqlPage = () => {
         <div className="relative flex w-full" style={{ backgroundColor: '#f5f5f5' }}>
           <div className="flex w-1/2 flex-col justify-between border border-b-0">
             <div className="overflow-auto">
-              <CodeEditor
-                value={graphQL.query}
-                onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
-                  dispatch(
-                    setGraphQL({
-                      ...graphQL,
-                      query: evn.target.value,
-                    })
-                  );
-                }}
-                {...EDITOR_OPTIONS}
-              />
+              {schema && (
+                <CodeMirror
+                  value={graphQL.query}
+                  theme={myTheme}
+                  extensions={[graphql(buildClientSchema(JSON.parse(schema)))]}
+                  onChange={(value: string) => {
+                    dispatch(
+                      setGraphQL({
+                        ...graphQL,
+                        query: value,
+                      })
+                    );
+                  }}
+                />
+              )}
             </div>
             <div
               className={`flex flex-col ${
@@ -142,13 +159,14 @@ const GraphiqlPage = () => {
               </nav>
               <section {...getCollapseProps()} className="overflow-hidden">
                 <TabPanel hidden={selectedTab !== 'Variables'}>
-                  <CodeEditor
+                  <CodeMirror
                     value={graphQL.variables}
-                    onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
+                    theme={myTheme}
+                    onChange={(value: string) => {
                       dispatch(
                         setGraphQL({
                           ...graphQL,
-                          variables: evn.target.value,
+                          variables: value,
                         })
                       );
                     }}
@@ -156,13 +174,14 @@ const GraphiqlPage = () => {
                   />
                 </TabPanel>
                 <TabPanel hidden={selectedTab !== 'Headers'}>
-                  <CodeEditor
+                  <CodeMirror
                     value={graphQL.headers}
-                    onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => {
+                    theme={myTheme}
+                    onChange={(value: string) => {
                       dispatch(
                         setGraphQL({
                           ...graphQL,
-                          headers: evn.target.value,
+                          headers: value,
                         })
                       );
                     }}
@@ -176,10 +195,14 @@ const GraphiqlPage = () => {
             <Loading className="w-1/2" />
           ) : (
             <div className="relative w-1/2 overflow-auto border border-b-0 ">
-              <CodeEditor
+              <CodeMirror
+                theme={myTheme}
                 value={isError ? errorFetchHandler(error) : JSON.stringify(data, null, '\t')}
                 readOnly
-                {...EDITOR_OPTIONS}
+                basicSetup={{
+                  lineNumbers: false,
+                  foldGutter: false,
+                }}
               />
             </div>
           )}
