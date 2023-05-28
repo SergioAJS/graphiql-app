@@ -56,7 +56,9 @@ const GraphiqlPage = () => {
     let parsedHeaders = { 'Content-Type': 'application/json' };
     let parsedVariables = {};
     try {
-      parsedVariables = JSON.parse(graphQL.variables);
+      if (graphQL.variables) {
+        parsedVariables = JSON.parse(graphQL.variables);
+      }
     } catch {
       errorVariables = true;
       dispatch(
@@ -68,7 +70,9 @@ const GraphiqlPage = () => {
       );
     }
     try {
-      parsedHeaders = { ...parsedHeaders, ...JSON.parse(graphQL.headers) };
+      if (graphQL.headers) {
+        parsedHeaders = { ...parsedHeaders, ...JSON.parse(graphQL.headers) };
+      }
     } catch {
       dispatch(
         addToast({
