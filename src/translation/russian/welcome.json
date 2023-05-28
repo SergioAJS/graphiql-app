@@ -1,0 +1,32 @@
+{
+  "This work done as a part of": "Эта работа выполнена в рамках ",
+  "Course": "курса RS School",
+  "Task description": "Catalyst Hub - это игровая площадка/IDE для запросов GraphQL. Также включает в себя возможности авторизации/аутентификации, чтобы предоставить доступ к инструменту только авторизованным пользователям.",
+  "Enroll Course": "Записаться на курс",
+  "Go to Main Page": "Перейти на главную страницу",
+  "Team Members": "Наша команда",
+  "Cite": "“Собраться вместе это начало. Оставаться вместе это прогресс. Работать вместе это успех.” - Генри Форд",
+  "TeamList": [
+    {
+      "title": "ЛИДЕР КОМАНДЫ",
+      "description": "Менеджер команды и проекта. Настройка маршрутизации страниц. Дизайн пользовательского интерфейса и стилизация страниц.",
+      "name": "Сергей Асланов",
+      "image": "/images/codewars_sloths.svg",
+      "link": "https://github.com/SergioAJS"
+    },
+    {
+      "title": "FRONT-END РАЗРАБОТЧИК",
+      "description": "Настроила i18next для управления локализацией проекта. Работала над разделами редактора GraphQL.",
+      "name": "Ирина Мигунова",
+      "image": "/images/congrats_sloths.svg",
+      "link": "https://github.com/istairina"
+    },
+    {
+      "title": "FRONT-END РАЗРАБОТЧИК",
+      "description": "Создание форм регистрации и входа, авторизация пользователей через Firebase. Настроил RTK Query и Store для работы с GraphQL API.",
+      "name": "Юрий Скрипаль",
+      "image": "/images/deadline_sloths.svg",
+      "link": "https://github.com/Sepulator"
+    }
+  ]
+}

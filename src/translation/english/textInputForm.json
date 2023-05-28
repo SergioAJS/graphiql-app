@@ -1,0 +1,19 @@
+{
+  "optional": "optional",
+  "Email is required": "Email is required",
+  "Email is invalid": "Email is invalid",
+  "Password is required": "Password is required",
+  "Password must be at least 8 characters": "Password must be at least 8 characters",
+  "Password must not exceed 20 characters": "Password must not exceed 20 characters",
+  "Name is required": "Name is required",
+  "Name must be at least 4 characters": "Name must be at least 4 characters",
+  "Name must not exceed 20 characters": "Name must not exceed 20 characters",
+  "Last name must not exceed 20 characters": "Last name must not exceed 20 characters",
+  "Email must be at least 8 characters": "Email must be at least 8 characters",
+  "Email must not exceed 20 characters": "Email must not exceed 20 characters",
+  "Password must contain at least one letter": "Password must contain at least one letter",
+  "Password must contain at least one number": "Password must contain at least one number",
+  "Password must contain at least one special character": "Password must contain at least one special character",
+  "Confirm Password is required": "Confirm Password is required",
+  "Confirm Password does not match": "Confirm Password does not match"
+}

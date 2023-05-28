@@ -1,0 +1,20 @@
+{
+  "optional": "опционально",
+  "Email is required": "Адрес электронной почты обязателен",
+  "Email is invalid": "Неверный адрес электронной почты",
+  "Password is required": "Пароль обязателен",
+  "Password must be at least 8 characters": "Пароль должен содержать минимум 8 символов",
+  "Password must not exceed 20 characters": "Длина пароля не должна превышать 20 символов",
+  "Name is required": "Имя обязательно",
+  "Name must be at least 4 characters": "Имя должно содержать не менее 4 символов",
+  "Name must not exceed 20 characters": "Имя не должно превышать 20 символов",
+  "Last name must not exceed 20 characters": "Фамилия не должна превышать 20 символов",
+  "Email must be at least 8 characters": "Адрес электронной почты должен содержать не менее 8 символов",
+  "Email must not exceed 20 characters": "Адрес электронной почты не должен превышать 20 символов",
+  "Password must contain at least one letter": "Пароль должен содержать хотя бы одну букву",
+  "Password must contain at least one number": "Пароль должен содержать хотя бы одну цифру",
+  "Password must contain at least one special character": "Пароль должен содержать как минимум один специальный символ",
+  "Confirm Password is required": "Требуется подтверждение пароля",
+  "Confirm Password does not match": "Пароль подтверждения не совпадает"
+
+}

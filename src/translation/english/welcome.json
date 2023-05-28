@@ -1,0 +1,32 @@
+{
+  "This work done as a part of": "This work done as a part of ",
+  "Course": "RS School Course",
+  "Task description": "Catalyst Hub is a playground/IDE for GraphQL requests. Also includes authorization/authentication capabilities, to give access to the tool to only to authorized users.",
+  "Enroll Course": "Enroll Course",
+  "Go to Main Page": "Go to Main Page",
+  "Team Members": "Team Members",
+  "Cite": "“Coming together is a beginning. Keeping together is progress. Working together is success.” - Henry Ford",
+  "TeamList": [
+    {
+      "title": "TEAM LEADER",
+      "description": "Team and project manager. Pages routing setup. User interface design and styling pages.",
+      "name": "Sergei Aslanov",
+      "image": "/images/codewars_sloths.svg",
+      "link": "https://github.com/SergioAJS"
+    },
+    {
+      "title": "FRONT-END DEVELOPER",
+      "description": "Configured i18next to manage project localization. Worked on sections of GraphQL editor.",
+      "name": "Irina Migunova",
+      "image": "/images/congrats_sloths.svg",
+      "link": "https://github.com/istairina"
+    },
+    {
+      "title": "FRONT-END DEVELOPER",
+      "description": "Created sign-up and sign-in forms, user authorization via Firebase. Set up RTK Query and Store to manage GraphQL API.",
+      "name": "Yuri Skrypal",
+      "image": "/images/deadline_sloths.svg",
+      "link": "https://github.com/Sepulator"
+    }
+  ]
+}
